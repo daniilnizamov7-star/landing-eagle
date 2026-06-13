@@ -321,7 +321,7 @@ footer .f-copy{font-size:11px;color:var(--muted);letter-spacing:1px}
 <!-- SCROLL TEXT SECTION -->
 <div class="scroll-text-wrap" id="scroll-text-wrap">
   <div class="scroll-text-sticky">
-    <!-- ВИДЕО 2: сюда вставить eagle-speed.mp4 когда сгенеришь -->
+    <video class="scroll-video-bg" autoplay muted loop playsinline src="eagle-scroll.mp4"></video>
     <div class="scroll-video-fallback">
       <!-- Анимированный SVG фон пока нет видео -->
       <svg style="position:absolute;inset:0;width:100%;height:100%" viewBox="0 0 1440 900" preserveAspectRatio="xMidYMid slice">
@@ -456,12 +456,8 @@ footer .f-copy{font-size:11px;color:var(--muted);letter-spacing:1px}
     </div>
     <div class="reveal-left">
       <div class="vid-block">
-        <div class="vid-block-fallback">
-          <div class="vid-glow"></div>
-          <div style="font-size:60px;z-index:1">👁️</div>
-          <div class="vid-frame"></div>
-          <div style="position:absolute;bottom:16px;left:0;right:0;text-align:center;font-size:10px;letter-spacing:2px;color:rgba(201,168,76,.4);text-transform:uppercase">Крупный план глаза</div>
-        </div>
+        <video autoplay muted loop playsinline src="eagle-eye.mp4" style="width:100%;border-radius:4px;display:block"></video>
+        <div class="vid-frame" style="position:absolute;inset:0;pointer-events:none"></div>
       </div>
     </div>
   </div>
