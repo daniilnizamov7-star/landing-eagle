@@ -167,9 +167,13 @@ footer{padding:36px 48px;border-top:1px solid rgba(255,255,255,.05);display:flex
   <div style="position:absolute;top:68px;left:0;right:0;text-align:center;z-index:2;padding:0 24px;opacity:0;animation:fadeUp .8s ease .3s forwards">
     <div style="font-size:11px;letter-spacing:6px;text-transform:uppercase;color:var(--gold);font-weight:300;margin-bottom:10px">Беркут · Aquila chrysaetos · EAGLE</div>
   </div>
-  <!-- НИЗ: Свобода + подзаголовок -->
-  <div style="position:absolute;bottom:80px;left:0;right:0;text-align:center;z-index:2;padding:0 24px;opacity:0;animation:fadeUp .8s ease .5s forwards">
-    <h1 class="hero-h1" style="margin-bottom:8px">EAGLE<span>Свобода</span></h1>
+  <!-- EAGLE — выше беркута -->
+  <div style="position:absolute;top:100px;left:0;right:0;text-align:center;z-index:2;padding:0 24px;opacity:0;animation:fadeUp .8s ease .4s forwards">
+    <h1 class="hero-h1" style="margin-bottom:0;line-height:1">EAGLE</h1>
+  </div>
+  <!-- Свобода + подзаголовок — внизу -->
+  <div style="position:absolute;bottom:80px;left:0;right:0;text-align:center;z-index:2;padding:0 24px;opacity:0;animation:fadeUp .8s ease .6s forwards">
+    <h1 class="hero-h1" style="margin-bottom:8px;font-size:clamp(44px,8vw,110px)"><span>Свобода</span></h1>
     <div class="hero-sub">Властелин небес · Хозяин горизонта</div>
   </div>
   <div class="hero-scroll-hint" style="bottom:28px">
@@ -212,7 +216,7 @@ footer{padding:36px 48px;border-top:1px solid rgba(255,255,255,.05);display:flex
       <div class="auto-pre" id="auto-pre"></div>
     </div>
     <!-- Центральный текст: главное — чуть ниже центра -->
-    <div style="text-align:center;margin-top:140px">
+    <div style="text-align:center;margin-top:220px">
       <div class="auto-main" id="auto-main"></div>
     </div>
     <!-- Нижний текст: подпись -->
@@ -394,7 +398,7 @@ updateSticky();
 // AUTO TEXT
 (function(){
   const phrases=[
-    {pre:'Беркут',main:'Рождён',sub:'Властелин небес · Aquila Chrysaetos'},
+    {pre:'Беркут · Aquila Chrysaetos',main:'Властелин',sub:'Хозяин неба и горизонта'},
     {pre:'Скорость',main:'320 км/ч',sub:'Быстрее гоночного болида'},
     {pre:'Зрение',main:'Видит всё',sub:'В 8 раз острее человеческого'},
     {pre:'Свобода',main:'Без границ',sub:'4 500 метров над землёй'},
