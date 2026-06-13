@@ -70,11 +70,11 @@ nav::before{content:'';position:absolute;inset:0;background:linear-gradient(to b
 /* AUTO TEXT SECTION */
 .auto-section{position:relative;height:100vh;overflow:hidden;display:flex;align-items:center;justify-content:center}
 .auto-video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:.7}
-.auto-overlay{position:absolute;inset:0;background:rgba(0,0,0,.5)}
+.auto-overlay{position:absolute;inset:0;background:rgba(0,0,0,.45)}
 .auto-content{position:relative;z-index:2;text-align:center;padding:40px;width:100%}
-.auto-pre{font-family:'Montserrat',sans-serif;font-weight:100;font-size:clamp(10px,1.5vw,14px);letter-spacing:7px;text-transform:uppercase;color:rgba(245,240,232,.4);margin-bottom:10px;transition:opacity .4s ease .1s}
-.auto-main{font-family:'Marck Script',cursive;font-size:clamp(72px,12vw,150px);line-height:.9;color:var(--gold);text-shadow:0 0 80px rgba(201,168,76,.4);transition:opacity .5s ease,transform .5s ease}
-.auto-sub{font-family:'Montserrat',sans-serif;font-weight:100;font-size:clamp(10px,1.3vw,13px);letter-spacing:4px;text-transform:uppercase;color:rgba(245,240,232,.35);margin-top:20px;transition:opacity .4s ease .2s}
+.auto-pre{font-family:'Montserrat',sans-serif;font-weight:300;font-size:clamp(11px,1.5vw,15px);letter-spacing:7px;text-transform:uppercase;color:rgba(245,240,232,.8);margin-bottom:10px;transition:opacity .3s ease .05s}
+.auto-main{font-family:'Marck Script',cursive;font-size:clamp(72px,12vw,150px);line-height:.9;color:var(--gold);text-shadow:0 0 80px rgba(201,168,76,.4),0 0 120px rgba(201,168,76,.2);transition:opacity .3s ease,transform .3s ease}
+.auto-sub{font-family:'Montserrat',sans-serif;font-weight:300;font-size:clamp(11px,1.3vw,14px);letter-spacing:4px;text-transform:uppercase;color:rgba(245,240,232,.75);margin-top:20px;transition:opacity .3s ease .1s}
 .auto-dots{position:absolute;bottom:36px;left:50%;transform:translateX(-50%);display:flex;gap:8px;z-index:3}
 .auto-dot{width:6px;height:6px;border-radius:3px;background:rgba(201,168,76,.3);transition:all .35s;cursor:pointer}
 .auto-dot.on{width:22px;background:var(--gold)}
@@ -168,7 +168,7 @@ footer{padding:36px 48px;border-top:1px solid rgba(255,255,255,.05);display:flex
     <div style="font-size:11px;letter-spacing:6px;text-transform:uppercase;color:var(--gold);font-weight:300">Беркут · Aquila chrysaetos</div>
   </div>
   <!-- Текст снизу -->
-  <div style="position:absolute;bottom:80px;left:0;right:0;text-align:center;z-index:2;padding:0 24px;opacity:0;animation:fadeUp .8s ease .5s forwards">
+  <div style="position:absolute;bottom:110px;left:0;right:0;text-align:center;z-index:2;padding:0 24px;opacity:0;animation:fadeUp .8s ease .5s forwards">
     <h1 class="hero-h1" style="margin-bottom:8px">EAGLE<span>Свобода</span></h1>
     <div class="hero-sub">Властелин небес · Хозяин горизонта</div>
   </div>
@@ -405,23 +405,30 @@ updateSticky();
   let cur=0,timer=null;
   function showPhrase(idx){
     cur=idx;
-    mainEl.style.opacity='0';mainEl.style.transform='translateY(24px)';
+    // Fade out быстро
+    mainEl.style.opacity='0';mainEl.style.transform='translateY(18px)';
     preEl.style.opacity='0';subEl.style.opacity='0';
     setTimeout(()=>{
       const p=phrases[idx];
       preEl.textContent=p.pre;mainEl.textContent=p.main;subEl.textContent=p.sub;
-      mainEl.style.opacity='1';mainEl.style.transform='translateY(0)';
-      setTimeout(()=>{preEl.style.opacity='1';subEl.style.opacity='1'},100);
-    },350);
+      // Fade in
+      requestAnimationFrame(()=>{
+        mainEl.style.opacity='1';mainEl.style.transform='translateY(0)';
+        preEl.style.opacity='1';subEl.style.opacity='1';
+      });
+    },220);
     dots.forEach((d,i)=>d.classList.toggle('on',i===idx));
   }
   function next(){showPhrase((cur+1)%phrases.length)}
-  showPhrase(0);
-  timer=setInterval(next,3200);
+  // Запускаем сразу после первого рендера
+  requestAnimationFrame(()=>requestAnimationFrame(()=>showPhrase(0)));
+  // Надёжный таймер — используем setTimeout рекурсивно вместо setInterval
+  function scheduleNext(){timer=setTimeout(()=>{next();scheduleNext()},2800)}
+  scheduleNext();
   const sec=mainEl.closest('section');
   if(sec){
-    sec.addEventListener('mouseenter',()=>clearInterval(timer));
-    sec.addEventListener('mouseleave',()=>{timer=setInterval(next,3200)});
+    sec.addEventListener('mouseenter',()=>{clearTimeout(timer);timer=null});
+    sec.addEventListener('mouseleave',()=>{if(!timer)scheduleNext()});
   }
 })();
 
