@@ -572,7 +572,7 @@ const pb=document.getElementById('progress');
 window.addEventListener('scroll',()=>{
   const pct=window.scrollY/(document.body.scrollHeight-window.innerHeight)*100;
   pb.style.width=pct+'%';
-});
+},{passive:true});
 
 // REVEAL
 const obs=new IntersectionObserver(es=>{
@@ -585,7 +585,8 @@ const cObs=new IntersectionObserver(es=>{
   es.forEach(e=>{
     if(!e.isIntersecting)return;
     cObs.unobserve(e.target);
-    const to=parseInt(e.target.dataset.to);
+    const to=parseInt(e.target.dataset.to)||0;
+    if(isNaN(to)||to===0){e.target.textContent='0';return;}
     const dur=1800;const start=performance.now();
     const step=now=>{
       const p=Math.min((now-start)/dur,1);
@@ -605,6 +606,7 @@ function updateSticky(){
   if(!stickyWrap)return;
   const rect=stickyWrap.getBoundingClientRect();
   const total=stickyWrap.offsetHeight-window.innerHeight;
+  if(total<=0)return;
   const scrolled=-rect.top;
   const pct=Math.max(0,Math.min(1,scrolled/total));
   const idx=Math.min(slides.length-1,Math.floor(pct*slides.length));
@@ -624,7 +626,18 @@ function resizeCanvas(){
   canvas.height=canvas.offsetHeight;
 }
 resizeCanvas();
-window.addEventListener('resize',resizeCanvas);
+let resizeTimer;
+window.addEventListener('resize',()=>{
+  clearTimeout(resizeTimer);
+  resizeTimer=setTimeout(()=>{
+    resizeCanvas();
+    // Пересоздаём частицы под новый размер
+    particles=particles.map(p=>({...p,
+      x:Math.random()*canvas.width,
+      y:Math.random()*canvas.height
+    }));
+  },150);
+});
 for(let i=0;i<80;i++){
   particles.push({
     x:Math.random()*canvas.width,
@@ -635,6 +648,7 @@ for(let i=0;i<80;i++){
     o:Math.random()*.6+.2
   });
 }
+let rafId=null;
 function animParticles(){
   ctx.clearRect(0,0,canvas.width,canvas.height);
   particles.forEach(p=>{
@@ -648,7 +662,7 @@ function animParticles(){
     if(p.y<0)p.y=canvas.height;
     if(p.y>canvas.height)p.y=0;
   });
-  requestAnimationFrame(animParticles);
+  rafId=requestAnimationFrame(animParticles);
 }
 animParticles();
 
@@ -682,6 +696,7 @@ window.addEventListener('scroll',()=>{
   function updateScrollText(){
     const rect = wrap.getBoundingClientRect();
     const total = wrap.offsetHeight - window.innerHeight;
+    if(total <= 0) return;
     const scrolled = -rect.top;
     const pct = Math.max(0, Math.min(1, scrolled / total));
 
