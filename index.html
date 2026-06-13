@@ -163,12 +163,12 @@ footer{padding:36px 48px;border-top:1px solid rgba(255,255,255,.05);display:flex
 <section class="hero" id="hero">
   <video class="hero-video" autoplay muted loop playsinline src="eagle-hero.mp4"></video>
   <div class="hero-overlay"></div>
-  <!-- Текст сверху -->
-  <div style="position:absolute;top:90px;left:0;right:0;text-align:center;z-index:2;opacity:0;animation:fadeUp .8s ease .3s forwards">
-    <div style="font-size:11px;letter-spacing:6px;text-transform:uppercase;color:var(--gold);font-weight:300">Беркут · Aquila chrysaetos</div>
+  <!-- ВЕРХ: Беркут + EAGLE -->
+  <div style="position:absolute;top:68px;left:0;right:0;text-align:center;z-index:2;padding:0 24px;opacity:0;animation:fadeUp .8s ease .3s forwards">
+    <div style="font-size:11px;letter-spacing:6px;text-transform:uppercase;color:var(--gold);font-weight:300;margin-bottom:10px">Беркут · Aquila chrysaetos · EAGLE</div>
   </div>
-  <!-- Текст снизу -->
-  <div style="position:absolute;bottom:110px;left:0;right:0;text-align:center;z-index:2;padding:0 24px;opacity:0;animation:fadeUp .8s ease .5s forwards">
+  <!-- НИЗ: Свобода + подзаголовок -->
+  <div style="position:absolute;bottom:80px;left:0;right:0;text-align:center;z-index:2;padding:0 24px;opacity:0;animation:fadeUp .8s ease .5s forwards">
     <h1 class="hero-h1" style="margin-bottom:8px">EAGLE<span>Свобода</span></h1>
     <div class="hero-sub">Властелин небес · Хозяин горизонта</div>
   </div>
@@ -206,10 +206,19 @@ footer{padding:36px 48px;border-top:1px solid rgba(255,255,255,.05);display:flex
 <section class="auto-section">
   <video class="auto-video" autoplay muted loop playsinline src="eagle-scroll.mp4"></video>
   <div class="auto-overlay"></div>
-  <div class="auto-content">
-    <div class="auto-pre" id="auto-pre"></div>
-    <div class="auto-main" id="auto-main"></div>
-    <div class="auto-sub" id="auto-sub"></div>
+  <div class="auto-content" style="display:flex;flex-direction:column;justify-content:space-between;height:100%;padding:50px 40px 70px">
+    <!-- Верхний текст: категория -->
+    <div style="text-align:center">
+      <div class="auto-pre" id="auto-pre"></div>
+    </div>
+    <!-- Центральный текст: главное — чуть ниже центра -->
+    <div style="text-align:center;margin-top:140px">
+      <div class="auto-main" id="auto-main"></div>
+    </div>
+    <!-- Нижний текст: подпись -->
+    <div style="text-align:center">
+      <div class="auto-sub" id="auto-sub"></div>
+    </div>
   </div>
   <div class="auto-dots" id="auto-dots"></div>
 </section>
