@@ -4,184 +4,151 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>EAGLE — Born to Soar</title>
-<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@100;300;700;900&family=Inter:wght@300;400;500&family=Playfair+Display:ital,wght@0,900;1,900&family=Marck+Script&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@100;300;700;900&family=Inter:wght@300;400;500&family=Marck+Script&display=swap" rel="stylesheet">
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-:root{
-  --bg:#000;--gold:#C9A84C;--gold2:#E8C97A;
-  --text:#F5F0E8;--muted:rgba(245,240,232,.5);
-}
+:root{--bg:#000;--gold:#C9A84C;--gold2:#E8C97A;--text:#F5F0E8;--muted:rgba(245,240,232,.5)}
 html{scroll-behavior:auto}
 body{background:var(--bg);color:var(--text);font-family:'Inter',sans-serif;overflow-x:hidden;cursor:none;-webkit-font-smoothing:antialiased}
+a{color:inherit;text-decoration:none}
 
 /* CURSOR */
 .cursor{position:fixed;z-index:9999;pointer-events:none;transform:translate(-50%,-50%)}
-.cursor-ring{width:40px;height:40px;border:1px solid rgba(201,168,76,.6);border-radius:50%;position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);transition:width .3s,height .3s,opacity .3s}
+.cursor-ring{width:40px;height:40px;border:1px solid rgba(201,168,76,.5);border-radius:50%;position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);transition:width .3s,height .3s}
 .cursor-dot{width:4px;height:4px;background:var(--gold);border-radius:50%;position:absolute;top:50%;left:50%;transform:translate(-50%,-50%)}
-.cursor-cross{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%)}
 .cursor-cross::before,.cursor-cross::after{content:'';position:absolute;background:rgba(201,168,76,.4)}
-.cursor-cross::before{width:16px;height:1px;top:0;left:-8px}
-.cursor-cross::after{width:1px;height:16px;top:-8px;left:0}
-body:hover .cursor-ring{opacity:1}
-.cursor.hovering .cursor-ring{width:60px;height:60px;opacity:.8}
+.cursor-cross::before{width:14px;height:1px;top:0;left:-7px}
+.cursor-cross::after{width:1px;height:14px;top:-7px;left:0}
+.cursor-cross{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%)}
+.cursor.hovering .cursor-ring{width:56px;height:56px}
 @media(pointer:coarse){.cursor{display:none}body{cursor:auto}}
 
 /* PROGRESS */
 .progress-bar{position:fixed;top:0;left:0;height:2px;background:linear-gradient(90deg,var(--gold),var(--gold2));z-index:200;width:0%;transition:width .1s}
 
 /* NAV */
-nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:28px 48px;display:flex;align-items:center;justify-content:space-between;mix-blend-mode:normal}
+nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:24px 48px;display:flex;align-items:center;justify-content:space-between}
 nav::before{content:'';position:absolute;inset:0;background:linear-gradient(to bottom,rgba(0,0,0,.7),transparent);pointer-events:none}
-.nav-logo{font-family:'Montserrat',sans-serif;font-weight:900;font-size:20px;letter-spacing:4px;color:var(--gold);position:relative}
-.nav-links{display:flex;gap:36px;list-style:none;position:relative}
-.nav-links a{font-size:12px;letter-spacing:2px;text-transform:uppercase;color:rgba(245,240,232,.7);transition:color .3s;font-weight:300}
+.nav-logo{font-family:'Montserrat',sans-serif;font-weight:900;font-size:18px;letter-spacing:4px;color:var(--gold);position:relative}
+.nav-links{display:flex;gap:32px;list-style:none;position:relative}
+.nav-links a{font-size:11px;letter-spacing:2px;text-transform:uppercase;color:rgba(245,240,232,.65);transition:color .3s;font-weight:300}
 .nav-links a:hover{color:var(--gold)}
+@media(max-width:640px){.nav-links{display:none}nav{padding:20px 24px}}
 
 /* HERO */
 .hero{height:100vh;position:relative;display:flex;align-items:center;justify-content:center;overflow:hidden}
-.hero-video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:1}
-.hero-bg{position:absolute;inset:0;background:linear-gradient(to bottom,rgba(0,0,0,.4) 0%,rgba(0,0,0,.2) 40%,rgba(0,0,0,.6) 100%)}
-/* Fallback SVG если нет видео */
-.hero-svg-bg{position:absolute;inset:0;width:100%;height:100%}
-.hero-content{position:relative;z-index:2;text-align:center;padding:0 24px;margin-top:-60px}
-.hero-eyebrow{font-size:11px;letter-spacing:6px;text-transform:uppercase;color:var(--gold);margin-bottom:24px;opacity:0;animation:fadeUp .8s ease .3s forwards}
-.hero-h1{font-family:'Montserrat',sans-serif;font-weight:900;font-size:clamp(72px,14vw,180px);line-height:.9;letter-spacing:-4px;color:var(--text);opacity:0;animation:fadeUp .8s ease .5s forwards}
-.hero-h1 span{color:var(--gold);display:block}
-.hero-sub{font-size:clamp(13px,1.5vw,16px);letter-spacing:3px;text-transform:uppercase;color:var(--muted);margin-top:24px;font-weight:300;opacity:0;animation:fadeUp .8s ease .7s forwards}
-.hero-scroll{position:absolute;bottom:40px;left:50%;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:8px;opacity:0;animation:fadeUp .8s ease 1.2s forwards}
-.hero-scroll span{font-size:10px;letter-spacing:3px;text-transform:uppercase;color:var(--muted)}
-.scroll-line{width:1px;height:50px;background:linear-gradient(to bottom,var(--gold),transparent);animation:scrollLine 1.5s ease-in-out infinite}
+.hero-video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.hero-overlay{position:absolute;inset:0;background:linear-gradient(to bottom,rgba(0,0,0,.35) 0%,rgba(0,0,0,.15) 40%,rgba(0,0,0,.55) 100%)}
+.hero-content{position:relative;z-index:2;text-align:center;padding:0 24px}
+.hero-eyebrow{font-size:11px;letter-spacing:6px;text-transform:uppercase;color:var(--gold);margin-bottom:20px;opacity:0;animation:fadeUp .8s ease .3s forwards}
+.hero-h1{font-family:'Montserrat',sans-serif;font-weight:900;font-size:clamp(72px,13vw,170px);line-height:.9;letter-spacing:-4px;opacity:0;animation:fadeUp .8s ease .5s forwards}
+.hero-h1 span{font-family:'Marck Script',cursive;font-size:.75em;color:var(--gold);display:block;letter-spacing:0;text-shadow:0 0 60px rgba(201,168,76,.4)}
+.hero-sub{font-size:clamp(11px,1.5vw,14px);letter-spacing:4px;text-transform:uppercase;color:var(--muted);margin-top:20px;font-weight:300;opacity:0;animation:fadeUp .8s ease .7s forwards}
+.hero-scroll-hint{position:absolute;bottom:36px;left:50%;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:8px;opacity:0;animation:fadeUp .8s ease 1.2s forwards;z-index:2}
+.hero-scroll-hint span{font-size:9px;letter-spacing:3px;text-transform:uppercase;color:var(--muted)}
+.scroll-line{width:1px;height:44px;background:linear-gradient(to bottom,var(--gold),transparent);animation:scrollLine 1.5s ease-in-out infinite}
 
 /* STATS */
-.stats{padding:80px 48px;display:grid;grid-template-columns:repeat(4,1fr);gap:2px;background:rgba(201,168,76,.1);border-top:1px solid rgba(201,168,76,.1);border-bottom:1px solid rgba(201,168,76,.1)}
-.stat{padding:40px 24px;text-align:center;background:#000;position:relative;overflow:hidden}
-.stat::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at center,rgba(201,168,76,.05),transparent);opacity:0;transition:opacity .4s}
-.stat:hover::before{opacity:1}
-.stat-num{font-family:'Montserrat',sans-serif;font-weight:900;font-size:clamp(40px,5vw,64px);color:var(--gold);letter-spacing:-2px;line-height:1}
-.stat-unit{font-size:18px;font-weight:300;opacity:.7}
-.stat-label{font-size:11px;letter-spacing:2px;text-transform:uppercase;color:var(--muted);margin-top:10px}
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:2px;background:rgba(201,168,76,.08);border-top:1px solid rgba(201,168,76,.08);border-bottom:1px solid rgba(201,168,76,.08)}
+.stat{padding:36px 20px;text-align:center;background:#000}
+.stat-num{font-family:'Montserrat',sans-serif;font-weight:900;font-size:clamp(36px,5vw,60px);color:var(--gold);letter-spacing:-2px;line-height:1}
+.stat-unit{font-size:16px;font-weight:300;opacity:.6}
+.stat-label{font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--muted);margin-top:8px}
+@media(max-width:600px){.stats{grid-template-columns:1fr 1fr}}
 
-/* SECTIONS */
-.section{min-height:100vh;display:flex;align-items:center;position:relative;overflow:hidden}
-.section-inner{max-width:1200px;margin:0 auto;padding:80px 48px;display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center;width:100%}
-.section.reverse .section-inner{direction:rtl}
-.section.reverse .section-inner>*{direction:ltr}
+/* FULLSCREEN SECTION */
+.fs-section{min-height:100vh;position:relative;overflow:hidden;display:flex;align-items:center}
+.fs-video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.fs-overlay-left{position:absolute;inset:0;background:linear-gradient(90deg,rgba(0,0,0,.92) 0%,rgba(0,0,0,.65) 45%,rgba(0,0,0,.15) 75%,transparent 100%)}
+.fs-overlay-right{position:absolute;inset:0;background:linear-gradient(270deg,rgba(0,0,0,.92) 0%,rgba(0,0,0,.65) 45%,rgba(0,0,0,.15) 75%,transparent 100%)}
+.fs-content{position:relative;z-index:2;max-width:1200px;margin:0 auto;padding:80px 48px;width:100%}
+.fs-content-right{display:flex;justify-content:flex-end}
+.fs-text{max-width:540px}
+.fs-divider{position:absolute;bottom:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,rgba(201,168,76,.25),transparent)}
+@media(max-width:768px){.fs-content{padding:60px 24px}.fs-overlay-left,.fs-overlay-right{background:rgba(0,0,0,.75)}}
 
-/* VIDEO BLOCK */
-.vid-block{position:relative;border-radius:4px;overflow:hidden}
-.vid-block video{width:100%;display:block;border-radius:4px}
-.vid-block-fallback{width:100%;aspect-ratio:9/16;background:#111;border-radius:4px;display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden}
-.vid-glow{position:absolute;inset:-20px;background:radial-gradient(ellipse at center,rgba(201,168,76,.15),transparent 70%)}
-.vid-placeholder{font-size:80px;z-index:1}
-.vid-frame{position:absolute;inset:0;border:1px solid rgba(201,168,76,.2);border-radius:4px;pointer-events:none}
-.vid-frame::before,.vid-frame::after{content:'';position:absolute;width:20px;height:20px;border-color:var(--gold);border-style:solid}
-.vid-frame::before{top:12px;left:12px;border-width:1px 0 0 1px}
-.vid-frame::after{bottom:12px;right:12px;border-width:0 1px 1px 0}
+/* AUTO TEXT SECTION */
+.auto-section{position:relative;height:100vh;overflow:hidden;display:flex;align-items:center;justify-content:center}
+.auto-video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:.7}
+.auto-overlay{position:absolute;inset:0;background:rgba(0,0,0,.5)}
+.auto-content{position:relative;z-index:2;text-align:center;padding:40px;width:100%}
+.auto-pre{font-family:'Montserrat',sans-serif;font-weight:100;font-size:clamp(10px,1.5vw,14px);letter-spacing:7px;text-transform:uppercase;color:rgba(245,240,232,.4);margin-bottom:10px;transition:opacity .4s ease .1s}
+.auto-main{font-family:'Marck Script',cursive;font-size:clamp(72px,12vw,150px);line-height:.9;color:var(--gold);text-shadow:0 0 80px rgba(201,168,76,.4);transition:opacity .5s ease,transform .5s ease}
+.auto-sub{font-family:'Montserrat',sans-serif;font-weight:100;font-size:clamp(10px,1.3vw,13px);letter-spacing:4px;text-transform:uppercase;color:rgba(245,240,232,.35);margin-top:20px;transition:opacity .4s ease .2s}
+.auto-dots{position:absolute;bottom:36px;left:50%;transform:translateX(-50%);display:flex;gap:8px;z-index:3}
+.auto-dot{width:6px;height:6px;border-radius:3px;background:rgba(201,168,76,.3);transition:all .35s;cursor:pointer}
+.auto-dot.on{width:22px;background:var(--gold)}
 
 /* TEXT BLOCKS */
-.section-tag{font-size:10px;letter-spacing:4px;text-transform:uppercase;color:var(--gold);margin-bottom:20px;display:flex;align-items:center;gap:12px}
-.section-tag::before{content:'';width:32px;height:1px;background:var(--gold)}
-.section-h2{font-family:'Montserrat',sans-serif;font-weight:900;font-size:clamp(36px,5vw,64px);line-height:1;letter-spacing:-2px;margin-bottom:24px}
-.section-h2 em{font-style:normal;color:var(--gold)}
-.section-p{font-size:16px;color:var(--muted);line-height:1.8;font-weight:300;margin-bottom:32px}
-.section-fact{display:flex;align-items:flex-start;gap:16px;margin-bottom:16px;padding:16px;border:1px solid rgba(201,168,76,.1);border-radius:4px;transition:border-color .3s,background .3s}
-.section-fact:hover{border-color:rgba(201,168,76,.3);background:rgba(201,168,76,.03)}
-.fact-num{font-family:'Montserrat',sans-serif;font-weight:900;font-size:28px;color:var(--gold);letter-spacing:-1px;min-width:70px;line-height:1}
-.fact-text{font-size:13px;color:var(--muted);line-height:1.6;padding-top:4px}
+.section-tag{font-size:10px;letter-spacing:4px;text-transform:uppercase;color:var(--gold);margin-bottom:18px;display:flex;align-items:center;gap:10px}
+.section-tag::before{content:'';width:28px;height:1px;background:var(--gold)}
+.section-h2{font-family:'Montserrat',sans-serif;font-weight:900;font-size:clamp(38px,5.5vw,68px);line-height:1;letter-spacing:-2px;margin-bottom:20px}
+.section-h2 .calli{font-family:'Marck Script',cursive;font-size:1.25em;color:var(--gold);display:block;letter-spacing:0;line-height:.9;text-shadow:0 0 50px rgba(201,168,76,.3)}
+.section-p{font-size:15px;color:var(--muted);line-height:1.8;font-weight:300;margin-bottom:28px}
+.fact{display:flex;align-items:flex-start;gap:14px;padding:14px 18px;border:1px solid rgba(201,168,76,.12);border-radius:4px;margin-bottom:12px;background:rgba(0,0,0,.35);backdrop-filter:blur(8px);transition:border-color .3s}
+.fact:hover{border-color:rgba(201,168,76,.3)}
+.fact-n{font-family:'Montserrat',sans-serif;font-weight:900;font-size:24px;color:var(--gold);letter-spacing:-1px;min-width:64px;line-height:1}
+.fact-t{font-size:12px;color:var(--muted);line-height:1.6;padding-top:3px}
 
-/* PARALLAX BG */
-.par-bg{position:absolute;inset:-20%;width:140%;height:140%;object-fit:cover;opacity:.15;will-change:transform}
-
-/* SCROLL SECTIONS — привязаны к скроллу */
+/* STICKY */
 .sticky-wrap{position:relative;height:300vh}
 .sticky-inner{position:sticky;top:0;height:100vh;overflow:hidden}
 .sticky-slide{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;opacity:0;transition:opacity .5s}
 .sticky-slide.active{opacity:1}
-.slide-bg{position:absolute;inset:0;background-size:cover;background-position:center}
-.slide-overlay{position:absolute;inset:0;background:rgba(0,0,0,.6)}
-.slide-content{position:relative;z-index:2;text-align:center;padding:40px}
-.slide-num{font-family:'Montserrat',sans-serif;font-weight:100;font-size:120px;color:rgba(201,168,76,.1);letter-spacing:-5px;line-height:1;position:absolute;top:50%;left:50%;transform:translate(-50%,-50%)}
-.slide-h{font-family:'Montserrat',sans-serif;font-weight:900;font-size:clamp(48px,8vw,100px);letter-spacing:-3px;line-height:.95;margin-bottom:16px}
-.slide-sub{font-size:14px;letter-spacing:3px;text-transform:uppercase;color:var(--muted);font-weight:300}
+.slide-bg{position:absolute;inset:0}
+.slide-ov{position:absolute;inset:0;background:rgba(0,0,0,.6)}
+.slide-txt{position:relative;z-index:2;text-align:center;padding:40px}
+.slide-n{font-family:'Montserrat',sans-serif;font-weight:100;font-size:130px;color:rgba(201,168,76,.07);line-height:1;position:absolute;top:50%;left:50%;transform:translate(-50%,-50%)}
+.slide-h{font-family:'Marck Script',cursive;font-size:clamp(56px,9vw,110px);color:var(--gold);line-height:.95;margin-bottom:12px;text-shadow:0 0 60px rgba(201,168,76,.35)}
+.slide-s{font-size:12px;letter-spacing:3px;text-transform:uppercase;color:var(--muted);font-weight:300}
+.slide-tag{font-size:10px;letter-spacing:4px;text-transform:uppercase;color:rgba(201,168,76,.5);margin-bottom:16px}
 
 /* QUOTE */
-.quote-section{padding:120px 48px;text-align:center;position:relative}
-.quote-section::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at center,rgba(201,168,76,.05),transparent 70%)}
-.quote-mark{font-family:'Montserrat',sans-serif;font-size:120px;color:rgba(201,168,76,.1);line-height:.5;font-weight:900}
-.quote-text{font-family:'Montserrat',sans-serif;font-weight:300;font-size:clamp(22px,3.5vw,42px);line-height:1.3;letter-spacing:-1px;max-width:900px;margin:0 auto 24px;position:relative;z-index:1}
+.quote{padding:100px 40px;text-align:center;position:relative}
+.quote::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at center,rgba(201,168,76,.04),transparent 70%)}
+.quote-mark{font-family:'Marck Script',cursive;font-size:100px;color:rgba(201,168,76,.1);line-height:.4;display:block}
+.quote-text{font-family:'Montserrat',sans-serif;font-weight:300;font-size:clamp(20px,3.5vw,40px);line-height:1.3;letter-spacing:-1px;max-width:860px;margin:16px auto 20px;position:relative;z-index:1}
 .quote-text em{font-style:normal;color:var(--gold)}
-.quote-author{font-size:12px;letter-spacing:3px;text-transform:uppercase;color:var(--muted)}
+.quote-author{font-size:11px;letter-spacing:3px;text-transform:uppercase;color:var(--muted)}
 
 /* FINAL */
 .final{height:100vh;display:flex;align-items:center;justify-content:center;text-align:center;position:relative;overflow:hidden;padding:40px}
-.final-bg{position:absolute;inset:0;background:radial-gradient(ellipse at 50% 60%,rgba(201,168,76,.12),transparent 65%)}
-.final-h{font-family:'Montserrat',sans-serif;font-weight:900;font-size:clamp(48px,10vw,130px);line-height:.9;letter-spacing:-4px;margin-bottom:32px}
-.final-h span{display:block;font-weight:100;font-size:.4em;letter-spacing:8px;color:var(--gold);text-transform:uppercase;margin-bottom:8px}
-.final-btns{display:flex;gap:16px;justify-content:center;flex-wrap:wrap}
-.btn-gold{background:var(--gold);color:#000;padding:16px 40px;font-size:13px;font-weight:700;letter-spacing:2px;text-transform:uppercase;border:none;cursor:none;transition:background .3s,transform .2s}
-.btn-gold:hover{background:var(--gold2);transform:translateY(-2px)}
-.btn-outline{border:1px solid rgba(201,168,76,.4);color:var(--gold);padding:16px 40px;font-size:13px;font-weight:400;letter-spacing:2px;text-transform:uppercase;background:none;cursor:none;transition:border-color .3s,background .3s}
-.btn-outline:hover{border-color:var(--gold);background:rgba(201,168,76,.05)}
+.final-bg{position:absolute;inset:0;background:radial-gradient(ellipse at 50% 55%,rgba(201,168,76,.1),transparent 65%)}
+.final-video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:.45}
+.final-ov{position:absolute;inset:0;background:rgba(0,0,0,.55)}
+.final-h{font-family:'Montserrat',sans-serif;font-weight:900;font-size:clamp(42px,9vw,120px);line-height:.9;letter-spacing:-3px;margin-bottom:28px}
+.final-pre{display:block;font-weight:100;font-size:.3em;letter-spacing:8px;color:rgba(245,240,232,.5);text-transform:uppercase;margin-bottom:8px}
+.final-calli{font-family:'Marck Script',cursive;font-size:.9em;color:var(--gold);display:block;letter-spacing:0;text-shadow:0 0 80px rgba(201,168,76,.4)}
+.btns{display:flex;gap:14px;justify-content:center;flex-wrap:wrap;margin-top:8px}
+.btn-g{background:var(--gold);color:#000;padding:14px 36px;font-size:12px;font-weight:700;letter-spacing:2px;text-transform:uppercase;border:none;cursor:none;transition:background .3s}
+.btn-g:hover{background:var(--gold2)}
+.btn-o{border:1px solid rgba(201,168,76,.4);color:var(--gold);padding:14px 36px;font-size:12px;font-weight:400;letter-spacing:2px;text-transform:uppercase;background:none;cursor:none;transition:border-color .3s}
+.btn-o:hover{border-color:var(--gold)}
+.demo-note{margin-top:44px;font-size:9px;letter-spacing:2px;color:rgba(201,168,76,.25);text-transform:uppercase}
 
 /* FOOTER */
-footer{padding:40px 48px;border-top:1px solid rgba(255,255,255,.06);display:flex;align-items:center;justify-content:space-between}
-footer .f-logo{font-family:'Montserrat',sans-serif;font-weight:900;font-size:14px;letter-spacing:4px;color:var(--gold)}
-footer .f-copy{font-size:11px;color:var(--muted);letter-spacing:1px}
-
-
-/* SCROLL TEXT SECTION */
-.scroll-text-wrap{position:relative;height:500vh}
-.scroll-text-sticky{position:sticky;top:0;height:100vh;overflow:hidden;display:flex;align-items:center;justify-content:center}
-.scroll-video-bg{position:absolute;inset:0;width:100%;height:100%;object-fit:coverz-index:1}
-.scroll-video-fallback{position:absolute;inset:0;background:radial-gradient(ellipse at 50% 30%,#1a0e00,#000)z-index:0}
-.scroll-overlay{position:absolute;inset:0;background:rgba(0,0,0,.55);z-index:2}
-.scroll-words{position:relative;z-index:3;text-align:center;padding:40px;max-width:1100px;margin:0 auto}
-.sw{display:inline-block;font-family:'Montserrat',sans-serif;font-weight:900;font-size:clamp(52px,10vw,128px);line-height:.95;letter-spacing:-4px;opacity:0;transform:translateY(60px) scale(.95);transition:opacity .6s ease,transform .6s ease;will-change:transform,opacity}
-.sw.gold{color:var(--gold)}
-.sw.white{color:var(--text)}
-.sw.show{opacity:1;transform:translateY(0) scale(1)}
-.sw-sub{font-size:clamp(12px,1.5vw,16px);letter-spacing:4px;text-transform:uppercase;color:var(--muted);font-weight:300;opacity:0;transform:translateY(20px);transition:opacity .5s ease .2s,transform .5s ease .2s;margin-top:16px;display:block}
-.sw-sub.show{opacity:1;transform:translateY(0)}
-.scroll-progress-ring{position:absolute;bottom:40px;right:48px;z-index:4}
-.ring-svg{transform:rotate(-90deg)}
-.ring-bg{fill:none;stroke:rgba(201,168,76,.15);stroke-width:2}
-.ring-fill{fill:none;stroke:var(--gold);stroke-width:2;stroke-linecap:round;stroke-dasharray:163;stroke-dashoffset:163;transition:stroke-dashoffset .1s}
-.ring-text{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);font-family:'Montserrat',sans-serif;font-weight:700;font-size:13px;color:var(--gold)}
-.scroll-hint{position:absolute;bottom:40px;left:50%;transform:translateX(-50%);z-index:4;text-align:center;opacity:1;transition:opacity .5s}
-.scroll-hint.hide{opacity:0}
-.scroll-hint span{font-size:10px;letter-spacing:3px;text-transform:uppercase;color:var(--muted);display:block;margin-top:6px}
+footer{padding:36px 48px;border-top:1px solid rgba(255,255,255,.05);display:flex;align-items:center;justify-content:space-between}
+.f-logo{font-family:'Montserrat',sans-serif;font-weight:900;font-size:13px;letter-spacing:4px;color:var(--gold)}
+.f-copy{font-size:10px;color:var(--muted);letter-spacing:1px}
+@media(max-width:480px){footer{padding:24px;flex-direction:column;gap:10px}}
 
 /* REVEAL */
-.reveal{opacity:0;transform:translateY(40px);transition:opacity .9s ease,transform .9s ease}
-.reveal.in{opacity:1;transform:translateY(0)}
-.reveal-left{opacity:0;transform:translateX(-40px);transition:opacity .9s ease,transform .9s ease}
-.reveal-left.in{opacity:1;transform:translateX(0)}
-.reveal-right{opacity:0;transform:translateX(40px);transition:opacity .9s ease,transform .9s ease}
-.reveal-right.in{opacity:1;transform:translateX(0)}
+.reveal{opacity:0;transform:translateY(36px);transition:opacity .9s ease,transform .9s ease}
+.reveal-l{opacity:0;transform:translateX(-36px);transition:opacity .9s ease,transform .9s ease}
+.reveal-r{opacity:0;transform:translateX(36px);transition:opacity .9s ease,transform .9s ease}
+.reveal.in,.reveal-l.in,.reveal-r.in{opacity:1;transform:none}
 
 /* ANIMATIONS */
-@keyframes fadeUp{from{opacity:0;transform:translateY(30px)}to{opacity:1;transform:translateY(0)}}
+@keyframes fadeUp{from{opacity:0;transform:translateY(28px)}to{opacity:1;transform:translateY(0)}}
 @keyframes scrollLine{0%{transform:scaleY(0);transform-origin:top}50%{transform:scaleY(1);transform-origin:top}51%{transform:scaleY(1);transform-origin:bottom}100%{transform:scaleY(0);transform-origin:bottom}}
-
-/* MOBILE */
-@media(max-width:768px){
-  nav{padding:20px 24px}
-  .nav-links{display:none}
-  .stats{grid-template-columns:1fr 1fr;padding:40px 24px}
-  .section-inner{grid-template-columns:1fr;gap:40px;padding:60px 24px}
-  .section.reverse .section-inner{direction:ltr}
-  .quote-section{padding:80px 24px}
-  .final{padding:24px}
-  footer{padding:24px;flex-direction:column;gap:12px;text-align:center}
-  .hero-h1{letter-spacing:-2px}
-}
 </style>
 </head>
 <body>
 
-<div class="progress-bar" id="progress"></div>
+<div class="progress-bar" id="pb"></div>
 <div class="cursor" id="cursor"><div class="cursor-ring"></div><div class="cursor-dot"></div><div class="cursor-cross"></div></div>
 
+<!-- NAV -->
 <nav>
   <div class="nav-logo">EAGLE</div>
   <ul class="nav-links">
@@ -194,72 +161,14 @@ footer .f-copy{font-size:11px;color:var(--muted);letter-spacing:1px}
 
 <!-- HERO -->
 <section class="hero" id="hero">
-  <video class="hero-video" autoplay muted loop playsinline src="eagle-hero.mp4" style="object-position:center center;opacity:1!important"></video>
-  <svg class="hero-svg-bg" viewBox="0 0 1440 900" preserveAspectRatio="xMidYMid slice">
-    <defs>
-      <radialGradient id="hg" cx="50%" cy="50%" r="70%">
-        <stop offset="0%" stop-color="#1a1200" stop-opacity=".8"/>
-        <stop offset="100%" stop-color="#000" stop-opacity="1"/>
-      </radialGradient>
-      <radialGradient id="sun" cx="50%" cy="30%" r="40%">
-        <stop offset="0%" stop-color="#C9A84C" stop-opacity=".3"/>
-        <stop offset="100%" stop-color="transparent"/>
-      </radialGradient>
-    </defs>
-    <rect width="1440" height="900" fill="#000"/>
-    <rect width="1440" height="900" fill="url(#sun)"/>
-    <!-- горы -->
-    <path d="M0 900 L200 400 L400 600 L600 250 L800 500 L1000 200 L1200 450 L1440 300 L1440 900Z" fill="#0a0800" opacity=".9"/>
-    <path d="M0 900 L300 600 L500 750 L700 500 L900 650 L1100 400 L1300 600 L1440 500 L1440 900Z" fill="#050400" opacity=".95"/>
-    <!-- звёзды -->
-    <circle cx="100" cy="80" r="1" fill="#C9A84C" opacity=".6"/>
-    <circle cx="280" cy="150" r="1.5" fill="#fff" opacity=".4"/>
-    <circle cx="450" cy="60" r="1" fill="#fff" opacity=".5"/>
-    <circle cx="700" cy="120" r="1" fill="#C9A84C" opacity=".7"/>
-    <circle cx="900" cy="50" r="1.5" fill="#fff" opacity=".3"/>
-    <circle cx="1100" cy="90" r="1" fill="#C9A84C" opacity=".5"/>
-    <circle cx="1300" cy="140" r="1" fill="#fff" opacity=".4"/>
-    <circle cx="200" cy="200" r="1" fill="#fff" opacity=".3"/>
-    <circle cx="600" cy="180" r="1" fill="#C9A84C" opacity=".4"/>
-    <circle cx="1200" cy="70" r="1.5" fill="#fff" opacity=".5"/>
-    <!-- орёл SVG -->
-    <g transform="translate(720,340) scale(1.4)" opacity=".85">
-      <!-- тело -->
-      <ellipse cx="0" cy="0" rx="28" ry="12" fill="#1a1200"/>
-      <!-- левое крыло -->
-      <path d="M-28,0 C-80,-30 -160,-20 -200,10 C-160,-5 -100,8 -28,0Z" fill="#2a1e00"/>
-      <path d="M-28,0 C-80,-50 -170,-45 -220,-10 C-170,-25 -100,-5 -28,0Z" fill="#221800"/>
-      <path d="M-28,-2 C-70,-60 -150,-65 -195,-35 C-150,-48 -85,-15 -28,-2Z" fill="#1a1200"/>
-      <!-- правое крыло -->
-      <path d="M28,0 C80,-30 160,-20 200,10 C160,-5 100,8 28,0Z" fill="#2a1e00"/>
-      <path d="M28,0 C80,-50 170,-45 220,-10 C170,-25 100,-5 28,0Z" fill="#221800"/>
-      <path d="M28,-2 C70,-60 150,-65 195,-35 C150,-48 85,-15 28,-2Z" fill="#1a1200"/>
-      <!-- голова -->
-      <circle cx="32" cy="-8" r="14" fill="#C9A84C" opacity=".9"/>
-      <circle cx="32" cy="-8" r="11" fill="#1a1200"/>
-      <!-- клюв -->
-      <path d="M44,-10 L56,-6 L44,-4Z" fill="#C9A84C"/>
-      <!-- глаз -->
-      <circle cx="38" cy="-10" r="4" fill="#C9A84C"/>
-      <circle cx="39" cy="-10" r="2.5" fill="#000"/>
-      <circle cx="40" cy="-11" r="1" fill="#fff" opacity=".8"/>
-      <!-- хвост -->
-      <path d="M-28,4 C-50,20 -60,35 -45,45 C-35,30 -20,15 -15,6Z" fill="#1a1200"/>
-      <path d="M-20,5 C-38,22 -42,38 -28,46 C-20,32 -10,16 -8,6Z" fill="#2a1e00"/>
-      <!-- когти / лапы -->
-      <path d="M5,10 L0,30 L-5,35 M0,30 L5,36 M0,30 L-8,28" stroke="#C9A84C" stroke-width="1.5" fill="none" opacity=".7"/>
-    </g>
-    <!-- золотой свет под орлом -->
-    <ellipse cx="720" cy="380" rx="120" ry="20" fill="#C9A84C" opacity=".06"/>
-    <rect width="1440" height="900" fill="url(#hg)"/>
-  </svg>
-  <div class="hero-bg"></div>
+  <video class="hero-video" autoplay muted loop playsinline src="eagle-hero.mp4"></video>
+  <div class="hero-overlay"></div>
   <div class="hero-content">
     <div class="hero-eyebrow">Беркут · Aquila chrysaetos</div>
-    <h1 class="hero-h1">EAGLE<span>СВОБОДА</span></h1>
+    <h1 class="hero-h1">EAGLE<span>Свобода</span></h1>
     <div class="hero-sub">Властелин небес · Хозяин горизонта</div>
   </div>
-  <div class="hero-scroll">
+  <div class="hero-scroll-hint">
     <div class="scroll-line"></div>
     <span>Листай</span>
   </div>
@@ -267,277 +176,147 @@ footer .f-copy{font-size:11px;color:var(--muted);letter-spacing:1px}
 
 <!-- STATS -->
 <div class="stats">
-  <div class="stat reveal">
-    <div class="stat-num"><span class="counter" data-to="320">0</span><span class="stat-unit"> км/ч</span></div>
-    <div class="stat-label">Скорость пике</div>
-  </div>
-  <div class="stat reveal">
-    <div class="stat-num"><span class="counter" data-to="8">0</span><span class="stat-unit">×</span></div>
-    <div class="stat-label">Острота зрения</div>
-  </div>
-  <div class="stat reveal">
-    <div class="stat-num"><span class="counter" data-to="4500">0</span><span class="stat-unit"> м</span></div>
-    <div class="stat-label">Высота полёта</div>
-  </div>
-  <div class="stat reveal">
-    <div class="stat-num"><span class="counter" data-to="30">0</span><span class="stat-unit"> лет</span></div>
-    <div class="stat-label">Продолжительность жизни</div>
-  </div>
+  <div class="stat reveal"><div class="stat-num"><span class="counter" data-to="320">0</span><span class="stat-unit"> км/ч</span></div><div class="stat-label">Скорость пике</div></div>
+  <div class="stat reveal"><div class="stat-num"><span class="counter" data-to="8">0</span><span class="stat-unit">×</span></div><div class="stat-label">Острота зрения</div></div>
+  <div class="stat reveal"><div class="stat-num"><span class="counter" data-to="4500">0</span><span class="stat-unit"> м</span></div><div class="stat-label">Высота полёта</div></div>
+  <div class="stat reveal"><div class="stat-num"><span class="counter" data-to="30">0</span><span class="stat-unit"> лет</span></div><div class="stat-label">Продолжительность жизни</div></div>
 </div>
 
-<!-- SECTION 1 — SPEED -->
-<section id="speed" style="min-height:100vh;position:relative;overflow:hidden;display:flex;align-items:center">
-  <!-- Fullscreen видео -->
-  <video autoplay muted loop playsinline src="eagle-speed.mp4"
-    style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:.75"></video>
-  <!-- Градиентный overlay слева для текста -->
-  <div style="position:absolute;inset:0;background:linear-gradient(90deg,rgba(0,0,0,.92) 0%,rgba(0,0,0,.7) 45%,rgba(0,0,0,.2) 70%,transparent 100%)"></div>
-  <!-- Контент поверх видео -->
-  <div style="position:relative;z-index:2;max-width:1200px;margin:0 auto;padding:80px 48px;width:100%">
-    <div style="max-width:560px">
-      <div class="section-tag reveal-left">01 — Скорость</div>
-      <div class="reveal-left" style="margin-bottom:24px">
-        <div style="font-family:'Montserrat',sans-serif;font-weight:100;font-size:clamp(14px,2vw,22px);letter-spacing:8px;text-transform:uppercase;color:rgba(245,240,232,.4);margin-bottom:6px">Быстрее чем</div>
-        <div style="font-family:'Marck Script',cursive;font-size:clamp(80px,12vw,160px);line-height:.85;color:var(--gold);text-shadow:0 0 60px rgba(201,168,76,.4),0 4px 20px rgba(201,168,76,.2)">молния</div>
-      </div>
-      <p class="section-p reveal-left">В пике беркут развивает скорость до 320 км/ч — быстрее гоночного автомобиля. Каждое перо, каждый изгиб крыла — результат миллионов лет эволюции.</p>
-      <div class="section-fact reveal-left" style="border-color:rgba(201,168,76,.2);background:rgba(0,0,0,.4);backdrop-filter:blur(8px)">
-        <div class="fact-num">320</div>
-        <div class="fact-text">км/ч — скорость пике. Тело складывается в идеальный аэродинамический снаряд</div>
-      </div>
-      <div class="section-fact reveal-left" style="border-color:rgba(201,168,76,.2);background:rgba(0,0,0,.4);backdrop-filter:blur(8px)">
-        <div class="fact-num">3 сек</div>
-        <div class="fact-text">от момента обнаружения добычи до удара — рефлексы быстрее человеческого восприятия</div>
-      </div>
+<!-- SPEED — fullscreen -->
+<section class="fs-section" id="speed">
+  <video class="fs-video" autoplay muted loop playsinline src="eagle-speed.mp4"></video>
+  <div class="fs-overlay-left"></div>
+  <div class="fs-content">
+    <div class="fs-text">
+      <div class="section-tag reveal-l">01 — Скорость</div>
+      <h2 class="section-h2 reveal-l">Быстрее чем<span class="calli">молния</span></h2>
+      <p class="section-p reveal-l">В пике беркут развивает скорость до 320 км/ч — быстрее гоночного автомобиля. Каждое перо, каждый изгиб крыла — результат миллионов лет эволюции.</p>
+      <div class="fact reveal-l"><div class="fact-n">320</div><div class="fact-t">км/ч — скорость пике. Тело складывается в идеальный аэродинамический снаряд</div></div>
+      <div class="fact reveal-l"><div class="fact-n">3 сек</div><div class="fact-t">от обнаружения добычи до удара — рефлексы быстрее человеческого восприятия</div></div>
     </div>
   </div>
-  <!-- Золотая полоса снизу -->
-  <div style="position:absolute;bottom:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,rgba(201,168,76,.3),transparent)"></div>
+  <div class="fs-divider"></div>
 </section>
 
-
-<!-- SCROLL TEXT SECTION -->
-<div class="scroll-text-wrap" id="scroll-text-wrap">
-  <div class="scroll-text-sticky">
-    <video class="scroll-video-bg" autoplay muted loop playsinline src="eagle-scroll.mp4"
-      onloadeddata="this.nextElementSibling.style.display='none'"></video>
-    <div class="scroll-video-fallback">
-      <!-- Анимированный SVG фон пока нет видео -->
-      <svg style="position:absolute;inset:0;width:100%;height:100%" viewBox="0 0 1440 900" preserveAspectRatio="xMidYMid slice">
-        <defs>
-          <radialGradient id="sg1" cx="50%" cy="40%" r="60%">
-            <stop offset="0%" stop-color="#2a1800" stop-opacity=".8"/>
-            <stop offset="100%" stop-color="#000"/>
-          </radialGradient>
-        </defs>
-        <rect width="1440" height="900" fill="url(#sg1)"/>
-        <circle cx="720" cy="300" r="200" fill="none" stroke="#C9A84C" stroke-width=".3" opacity=".2"/>
-        <circle cx="720" cy="300" r="350" fill="none" stroke="#C9A84C" stroke-width=".3" opacity=".12"/>
-        <circle cx="720" cy="300" r="500" fill="none" stroke="#C9A84C" stroke-width=".3" opacity=".07"/>
-        <!-- лучи света -->
-        <line x1="720" y1="100" x2="200" y2="900" stroke="#C9A84C" stroke-width=".5" opacity=".06"/>
-        <line x1="720" y1="100" x2="400" y2="900" stroke="#C9A84C" stroke-width=".5" opacity=".08"/>
-        <line x1="720" y1="100" x2="720" y2="900" stroke="#C9A84C" stroke-width=".5" opacity=".1"/>
-        <line x1="720" y1="100" x2="1040" y2="900" stroke="#C9A84C" stroke-width=".5" opacity=".08"/>
-        <line x1="720" y1="100" x2="1240" y2="900" stroke="#C9A84C" stroke-width=".5" opacity=".06"/>
-        <!-- орёл силуэт большой -->
-        <g transform="translate(720,280) scale(3)" opacity=".12">
-          <path d="M-28,0 C-80,-30 -160,-20 -200,10 C-160,-5 -100,8 -28,0Z" fill="#C9A84C"/>
-          <path d="M28,0 C80,-30 160,-20 200,10 C160,-5 100,8 28,0Z" fill="#C9A84C"/>
-          <ellipse cx="0" cy="0" rx="28" ry="12" fill="#C9A84C"/>
-          <circle cx="32" cy="-8" r="14" fill="#C9A84C"/>
-        </g>
-      </svg>
-    </div>
-    <div class="scroll-overlay"></div>
-
-    <!-- ТЕКСТ КОТОРЫЙ ПОЯВЛЯЕТСЯ ПО СКРОЛЛУ -->
-    <div class="scroll-words" id="scroll-words">
-      <!-- Фраза 1 -->
-      <div id="phrase-1" style="position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:40px">
-        <div style="overflow:hidden"><span class="sw gold" id="w1-1">РОЖДЁН</span></div>
-        <div style="overflow:hidden"><span class="sw white" id="w1-2">ПОБЕЖДАТЬ</span></div>
-        <span class="sw-sub" id="w1-sub">Беркут · Властелин небес</span>
-      </div>
-      <!-- Фраза 2 -->
-      <div id="phrase-2" style="position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:40px;opacity:0;transition:opacity .4s">
-        <div style="overflow:hidden"><span class="sw white" id="w2-1">320</span></div>
-        <div style="overflow:hidden"><span class="sw gold" id="w2-2">КМ/ЧАС</span></div>
-        <span class="sw-sub" id="w2-sub">Скорость пике — быстрее гоночного болида</span>
-      </div>
-      <!-- Фраза 3 -->
-      <div id="phrase-3" style="position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:40px;opacity:0;transition:opacity .4s">
-        <div style="overflow:hidden"><span class="sw white" id="w3-1">ВИДИТ</span></div>
-        <div style="overflow:hidden"><span class="sw gold" id="w3-2">ВСЁ</span></div>
-        <span class="sw-sub" id="w3-sub">Зрение в 8 раз острее человеческого</span>
-      </div>
-      <!-- Фраза 4 -->
-      <div id="phrase-4" style="position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:40px;opacity:0;transition:opacity .4s">
-        <div style="overflow:hidden"><span class="sw white" id="w4-1">СВОБОДА</span></div>
-        <div style="overflow:hidden"><span class="sw gold" id="w4-2">БЕЗ ГРАНИЦ</span></div>
-        <span class="sw-sub" id="w4-sub">4 500 метров над землёй</span>
-      </div>
-    </div>
-
-    <!-- Прогресс кольцо -->
-    <div class="scroll-progress-ring">
-      <svg class="ring-svg" width="52" height="52" viewBox="0 0 52 52">
-        <circle class="ring-bg" cx="26" cy="26" r="22"/>
-        <circle class="ring-fill" id="ring-fill" cx="26" cy="26" r="22"/>
-      </svg>
-      <div class="ring-text" id="ring-pct">0%</div>
-    </div>
-
-    <!-- Подсказка скролла -->
-    <div class="scroll-hint" id="scroll-hint-st">
-      <div class="scroll-line" style="margin:0 auto"></div>
-      <span>Листай</span>
-    </div>
+<!-- AUTO TEXT — видео + автосмена текста -->
+<section class="auto-section">
+  <video class="auto-video" autoplay muted loop playsinline src="eagle-scroll.mp4"></video>
+  <div class="auto-overlay"></div>
+  <div class="auto-content">
+    <div class="auto-pre" id="auto-pre"></div>
+    <div class="auto-main" id="auto-main"></div>
+    <div class="auto-sub" id="auto-sub"></div>
   </div>
-</div>
+  <div class="auto-dots" id="auto-dots"></div>
+</section>
 
-<!-- STICKY SCROLL SECTION -->
+<!-- STICKY SLIDES -->
 <div class="sticky-wrap" id="sticky">
   <div class="sticky-inner">
-
     <div class="sticky-slide" id="slide-1">
       <div class="slide-bg" style="background:radial-gradient(ellipse at 30% 40%,#1a0e00,#000)"></div>
-      <div class="slide-overlay"></div>
-      <div class="slide-num">01</div>
-      <div class="slide-content">
-        <div class="section-tag" style="justify-content:center;margin-bottom:16px">Высота</div>
-        <div class="slide-h">4 500 <em style="font-style:normal;color:var(--gold)">м</em></div>
-        <div class="slide-sub">Над уровнем моря</div>
+      <div class="slide-ov"></div>
+      <div class="slide-n">01</div>
+      <div class="slide-txt">
+        <div class="slide-tag">Высота</div>
+        <div class="slide-h">4 500 м</div>
+        <div class="slide-s">Над уровнем моря</div>
       </div>
     </div>
-
     <div class="sticky-slide" id="slide-2">
       <div class="slide-bg" style="background:radial-gradient(ellipse at 70% 30%,#0a0f00,#000)"></div>
-      <div class="slide-overlay"></div>
-      <div class="slide-num">02</div>
-      <div class="slide-content">
-        <div class="section-tag" style="justify-content:center;margin-bottom:16px">Зрение</div>
-        <div class="slide-h"><em style="font-style:normal;color:var(--gold)">8×</em> чётче</div>
-        <div class="slide-sub">Чем человеческий глаз</div>
+      <div class="slide-ov"></div>
+      <div class="slide-n">02</div>
+      <div class="slide-txt">
+        <div class="slide-tag">Зрение</div>
+        <div class="slide-h">8× чётче</div>
+        <div class="slide-s">Чем человеческий глаз</div>
       </div>
     </div>
-
     <div class="sticky-slide" id="slide-3">
       <div class="slide-bg" style="background:radial-gradient(ellipse at 50% 60%,#100500,#000)"></div>
-      <div class="slide-overlay"></div>
-      <div class="slide-num">03</div>
-      <div class="slide-content">
-        <div class="section-tag" style="justify-content:center;margin-bottom:16px">Территория</div>
-        <div class="slide-h">200 <em style="font-style:normal;color:var(--gold)">км²</em></div>
-        <div class="slide-sub">Охотничьи угодья одной пары</div>
+      <div class="slide-ov"></div>
+      <div class="slide-n">03</div>
+      <div class="slide-txt">
+        <div class="slide-tag">Территория</div>
+        <div class="slide-h">200 км²</div>
+        <div class="slide-s">Охотничьи угодья одной пары</div>
       </div>
     </div>
-
   </div>
 </div>
 
-<!-- SECTION 2 — VISION -->
-<section class="section reverse" id="vision" style="background:#000">
-  <div style="position:absolute;inset:0;background:radial-gradient(ellipse at 80% 50%,rgba(201,168,76,.05),transparent 60%)"></div>
-  <div class="section-inner">
-    <div class="reveal-right">
-      <div class="section-tag">02 — Зрение</div>
-      <h2 class="section-h2">Видит<br>то что <em>скрыто</em></h2>
-      <p class="section-p">Орёл замечает зайца с расстояния 3 километров. Два жёлтых пятна на сетчатке — fovea — дают разрешение как у телескопа.</p>
-      <div class="section-fact">
-        <div class="fact-num">3 км</div>
-        <div class="fact-text">дистанция на которой орёл видит цель — человек едва различит её в бинокль</div>
-      </div>
-      <div class="section-fact">
-        <div class="fact-num">340°</div>
-        <div class="fact-text">угол обзора — орёл видит почти всё вокруг себя одновременно</div>
-      </div>
-    </div>
-    <div class="reveal-left">
-      <div class="vid-block">
-        <video autoplay muted loop playsinline src="eagle-eye.mp4" style="width:100%;border-radius:4px;display:block"></video>
-        <div class="vid-frame" style="position:absolute;inset:0;pointer-events:none"></div>
-      </div>
+<!-- VISION — fullscreen справа -->
+<section class="fs-section" id="vision">
+  <video class="fs-video" autoplay muted loop playsinline src="eagle-eye.mp4"></video>
+  <div class="fs-overlay-right"></div>
+  <div class="fs-content fs-content-right">
+    <div class="fs-text">
+      <div class="section-tag reveal-r">02 — Зрение</div>
+      <h2 class="section-h2 reveal-r">Видит<span class="calli">всё скрытое</span></h2>
+      <p class="section-p reveal-r">Орёл замечает зайца с расстояния 3 километров. Два жёлтых пятна на сетчатке — fovea — дают разрешение как у телескопа.</p>
+      <div class="fact reveal-r"><div class="fact-n">3 км</div><div class="fact-t">дистанция на которой орёл видит цель — человек едва различит в бинокль</div></div>
+      <div class="fact reveal-r"><div class="fact-n">340°</div><div class="fact-t">угол обзора — орёл видит почти всё вокруг одновременно</div></div>
     </div>
   </div>
+  <div class="fs-divider"></div>
 </section>
 
 <!-- QUOTE -->
-<div class="quote-section reveal">
-  <div class="quote-mark">"</div>
+<div class="quote reveal">
+  <span class="quote-mark">"</span>
   <p class="quote-text">Орёл не борется со штормом — он <em>использует его</em>, поднимаясь выше туч, пока маленькие птицы прячутся</p>
   <div class="quote-author">— Древняя мудрость</div>
 </div>
 
-<!-- SECTION 3 — POWER -->
-<section id="power" style="min-height:100vh;position:relative;overflow:hidden;display:flex;align-items:center">
-  <!-- Видео на весь экран — eagle-power.mp4 когда будет готово -->
-  <!-- <video autoplay muted loop playsinline src="eagle-power.mp4"
-    style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:.6"></video> -->
-  <!-- Пока SVG фон -->
-  <div style="position:absolute;inset:0;background:radial-gradient(ellipse at 70% 40%,#1a0800,#000)">
-    <svg style="position:absolute;inset:0;width:100%;height:100%" viewBox="0 0 1440 900" preserveAspectRatio="xMidYMid slice" opacity=".4">
-      <line x1="0" y1="200" x2="1440" y2="350" stroke="#C9A84C" stroke-width="0.5" opacity=".2"/>
-      <line x1="0" y1="400" x2="1440" y2="500" stroke="#C9A84C" stroke-width="0.5" opacity=".15"/>
-      <line x1="0" y1="600" x2="1440" y2="650" stroke="#C9A84C" stroke-width="0.5" opacity=".1"/>
-      <!-- Когти крупным планом -->
-      <g transform="translate(900,450) scale(4)" opacity=".6">
-        <path d="M0,0 C5,-15 15,-25 20,-40 C22,-30 18,-15 15,0" fill="#2a1800"/>
-        <path d="M0,0 C-5,-15 -15,-25 -20,-40 C-22,-30 -18,-15 -15,0" fill="#2a1800"/>
-        <path d="M5,-5 C15,-20 30,-35 45,-55 C42,-40 35,-22 25,-5" fill="#1a1000"/>
-        <path d="M-5,-5 C-15,-20 -30,-35 -45,-55 C-42,-40 -35,-22 -25,-5" fill="#1a1000"/>
-        <ellipse cx="0" cy="5" rx="18" ry="8" fill="#C9A84C" opacity=".3"/>
+<!-- POWER — fullscreen слева, видео eagle-power.mp4 когда будет -->
+<section class="fs-section" id="power">
+  <!-- Раскомментируй когда получишь eagle-power.mp4:
+  <video class="fs-video" autoplay muted loop playsinline src="eagle-power.mp4"></video> -->
+  <div style="position:absolute;inset:0;background:radial-gradient(ellipse at 65% 40%,#1a0800,#000)">
+    <svg style="width:100%;height:100%;opacity:.35" viewBox="0 0 1440 900" preserveAspectRatio="xMidYMid slice">
+      <g transform="translate(950,450) scale(5)" opacity=".7">
+        <path d="M0,0 C5,-18 18,-32 22,-50 C25,-36 20,-18 16,0" fill="#2a1800"/>
+        <path d="M0,0 C-5,-18 -18,-32 -22,-50 C-25,-36 -20,-18 -16,0" fill="#2a1800"/>
+        <path d="M6,-5 C18,-24 36,-42 52,-64 C48,-46 40,-26 28,-5" fill="#1a1000"/>
+        <path d="M-6,-5 C-18,-24 -36,-42 -52,-64 C-48,-46 -40,-26 -28,-5" fill="#1a1000"/>
+        <ellipse cx="0" cy="6" rx="20" ry="10" fill="#C9A84C" opacity=".2"/>
       </g>
     </svg>
   </div>
-  <!-- Градиент справа→лево (текст справа) -->
-  <div style="position:absolute;inset:0;background:linear-gradient(270deg,rgba(0,0,0,.92) 0%,rgba(0,0,0,.7) 45%,rgba(0,0,0,.2) 70%,transparent 100%)"></div>
-  <!-- Контент справа -->
-  <div style="position:relative;z-index:2;max-width:1200px;margin:0 auto;padding:80px 48px;width:100%;display:flex;justify-content:flex-end">
-    <div style="max-width:560px">
-      <div class="section-tag reveal-right">03 — Сила</div>
-      <h2 class="section-h2 reveal-right">Сжимает<br><span class="calli" style="font-size:clamp(56px,8vw,100px)">сталь</span></h2>
-      <p class="section-p reveal-right">Лапы беркута сжимают добычу с усилием 300 кг/см² — в 10 раз сильнее человеческой руки. Никакого бегства.</p>
-      <div class="section-fact reveal-right" style="background:rgba(0,0,0,.4);backdrop-filter:blur(8px);border-color:rgba(201,168,76,.2)">
-        <div class="fact-num">300</div>
-        <div class="fact-text">кг/см² — давление когтей. Кость ломается мгновенно, добыча не успевает почувствовать боль</div>
-      </div>
-      <div class="section-fact reveal-right" style="background:rgba(0,0,0,.4);backdrop-filter:blur(8px);border-color:rgba(201,168,76,.2)">
-        <div class="fact-num">6 кг</div>
-        <div class="fact-text">максимальная добыча — молодой олень или лиса. Вес в 1.5 раза превышает вес орла</div>
-      </div>
+  <div class="fs-overlay-left"></div>
+  <div class="fs-content">
+    <div class="fs-text">
+      <div class="section-tag reveal-l">03 — Сила</div>
+      <h2 class="section-h2 reveal-l">Сжимает<span class="calli">сталь</span></h2>
+      <p class="section-p reveal-l">Лапы беркута сжимают добычу с усилием 300 кг/см² — в 10 раз сильнее человеческой руки. Никакого бегства.</p>
+      <div class="fact reveal-l"><div class="fact-n">300</div><div class="fact-t">кг/см² — давление когтей. Кость ломается мгновенно</div></div>
+      <div class="fact reveal-l"><div class="fact-n">6 кг</div><div class="fact-t">максимальная добыча — вес в 1.5 раза превышает вес орла</div></div>
     </div>
   </div>
-  <div style="position:absolute;bottom:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,rgba(201,168,76,.3),transparent)"></div>
+  <div class="fs-divider"></div>
 </section>
 
-
-
-<!-- QUOTE -->
-<div class="quote-section reveal">
-  <div class="quote-mark">"</div>
-  <p class="quote-text">Орёл не борется со штормом — он <em>использует его</em>, поднимаясь выше туч, пока маленькие птицы прячутся</p>
-  <div class="quote-author">— Древняя мудрость</div>
-</div>
-
-<!-- FINAL -->
+<!-- FINAL / FREEDOM -->
 <section class="final" id="freedom">
   <div class="final-bg"></div>
-  <!-- eagle-freedom.mp4 — поставь когда сгенеришь -->
-  <!-- <video autoplay muted loop playsinline src="eagle-freedom.mp4"
-    style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:.5"></video> -->
-  <canvas id="particles" style="position:absolute;inset:0;width:100%;height:100%;opacity:.4"></canvas>
-  <div style="position:relative;z-index:2;text-align:center;padding:40px">
+  <!-- Раскомментируй когда получишь eagle-freedom.mp4:
+  <video class="final-video" autoplay muted loop playsinline src="eagle-freedom.mp4"></video>
+  <div class="final-ov"></div> -->
+  <canvas id="particles" style="position:absolute;inset:0;width:100%;height:100%;opacity:.5"></canvas>
+  <div style="position:relative;z-index:2">
     <div class="reveal">
-      <div style="font-family:'Montserrat',sans-serif;font-weight:100;font-size:clamp(11px,1.5vw,16px);letter-spacing:8px;text-transform:uppercase;color:rgba(245,240,232,.4);margin-bottom:12px">Рождён для</div>
-      <div class="calli" style="font-size:clamp(80px,14vw,180px);display:block;margin-bottom:24px">Свободы</div>
-      <p style="font-size:14px;letter-spacing:3px;text-transform:uppercase;color:var(--muted);margin-bottom:40px;font-weight:300">Беркут · Символ силы и независимости</p>
-      <div class="final-btns">
-        <button class="btn-gold">Узнать больше</button>
-        <button class="btn-outline">Смотреть видео</button>
+      <h2 class="final-h">
+        <span class="final-pre">Рождён для</span>
+        <span class="final-calli">Свободы</span>
+      </h2>
+      <p style="font-size:11px;letter-spacing:3px;text-transform:uppercase;color:var(--muted);margin-bottom:36px;font-weight:300">Беркут · Символ силы и независимости</p>
+      <div class="btns">
+        <button class="btn-g">Узнать больше</button>
+        <button class="btn-o">Смотреть видео</button>
       </div>
     </div>
-    <p style="margin-top:48px;font-size:10px;letter-spacing:2px;color:rgba(201,168,76,.3);text-transform:uppercase">Этот лендинг — демо Nizamov.tech · nizamov-tech.ru</p>
+    <div class="demo-note">Демо · Nizamov.tech · nizamov-tech.ru</div>
   </div>
 </section>
 
@@ -549,27 +328,23 @@ footer .f-copy{font-size:11px;color:var(--muted);letter-spacing:1px}
 <script>
 // CURSOR
 const cur=document.getElementById('cursor');
-document.addEventListener('mousemove',e=>{
-  cur.style.left=e.clientX+'px';
-  cur.style.top=e.clientY+'px';
-});
-document.querySelectorAll('a,button,.section-fact,.stat').forEach(el=>{
+document.addEventListener('mousemove',e=>{cur.style.left=e.clientX+'px';cur.style.top=e.clientY+'px'});
+document.querySelectorAll('a,button,.fact,.stat').forEach(el=>{
   el.addEventListener('mouseenter',()=>cur.classList.add('hovering'));
   el.addEventListener('mouseleave',()=>cur.classList.remove('hovering'));
 });
 
-// PROGRESS BAR
-const pb=document.getElementById('progress');
+// PROGRESS
+const pb=document.getElementById('pb');
 window.addEventListener('scroll',()=>{
-  const pct=window.scrollY/(document.body.scrollHeight-window.innerHeight)*100;
-  pb.style.width=pct+'%';
+  pb.style.width=(window.scrollY/(document.body.scrollHeight-window.innerHeight)*100)+'%';
 },{passive:true});
 
 // REVEAL
 const obs=new IntersectionObserver(es=>{
   es.forEach(e=>{if(e.isIntersecting)e.target.classList.add('in')});
-},{threshold:.15});
-document.querySelectorAll('.reveal,.reveal-left,.reveal-right').forEach(el=>obs.observe(el));
+},{threshold:.12});
+document.querySelectorAll('.reveal,.reveal-l,.reveal-r').forEach(el=>obs.observe(el));
 
 // COUNTERS
 const cObs=new IntersectionObserver(es=>{
@@ -577,20 +352,18 @@ const cObs=new IntersectionObserver(es=>{
     if(!e.isIntersecting)return;
     cObs.unobserve(e.target);
     const to=parseInt(e.target.dataset.to)||0;
-    if(isNaN(to)||to===0){e.target.textContent='0';return;}
-    const dur=1800;const start=performance.now();
-    const step=now=>{
+    const dur=1800,start=performance.now();
+    const tick=now=>{
       const p=Math.min((now-start)/dur,1);
-      const ease=1-Math.pow(1-p,3);
-      e.target.textContent=Math.round(to*ease).toLocaleString('ru');
-      if(p<1)requestAnimationFrame(step);
+      e.target.textContent=Math.round(to*(1-Math.pow(1-p,3))).toLocaleString('ru');
+      if(p<1)requestAnimationFrame(tick);
     };
-    requestAnimationFrame(step);
+    requestAnimationFrame(tick);
   });
 },{threshold:.5});
 document.querySelectorAll('.counter').forEach(el=>cObs.observe(el));
 
-// STICKY SCROLL
+// STICKY SLIDES
 const stickyWrap=document.getElementById('sticky');
 const slides=document.querySelectorAll('.sticky-slide');
 function updateSticky(){
@@ -598,15 +371,14 @@ function updateSticky(){
   const rect=stickyWrap.getBoundingClientRect();
   const total=stickyWrap.offsetHeight-window.innerHeight;
   if(total<=0)return;
-  const scrolled=-rect.top;
-  const pct=Math.max(0,Math.min(1,scrolled/total));
+  const pct=Math.max(0,Math.min(1,-rect.top/total));
   const idx=Math.min(slides.length-1,Math.floor(pct*slides.length));
-  slides.forEach((s,i)=>{s.classList.toggle('active',i===idx)});
+  slides.forEach((s,i)=>s.classList.toggle('active',i===idx));
 }
 window.addEventListener('scroll',updateSticky,{passive:true});
 updateSticky();
 
-// AUTO TEXT ANIMATION
+// AUTO TEXT
 (function(){
   const phrases=[
     {pre:'Беркут',main:'Рождён',sub:'Властелин небес · Aquila Chrysaetos'},
@@ -618,18 +390,18 @@ updateSticky();
   const mainEl=document.getElementById('auto-main');
   const subEl=document.getElementById('auto-sub');
   const dotsWrap=document.getElementById('auto-dots');
-  if(!preEl||!mainEl)return;
+  if(!preEl)return;
   const dots=phrases.map((_,i)=>{
     const d=document.createElement('div');
-    d.style.cssText='width:6px;height:6px;border-radius:50%;background:rgba(201,168,76,.3);transition:all .3s;cursor:pointer';
-    d.onclick=()=>{showPhrase(i);clearInterval(timer);timer=setInterval(next,3000)};
+    d.className='auto-dot';
+    d.onclick=()=>{showPhrase(i);clearInterval(timer);timer=setInterval(next,3200)};
     dotsWrap&&dotsWrap.appendChild(d);
     return d;
   });
-  let current=0,timer=null;
+  let cur=0,timer=null;
   function showPhrase(idx){
-    current=idx;
-    mainEl.style.opacity='0';mainEl.style.transform='translateY(20px)';
+    cur=idx;
+    mainEl.style.opacity='0';mainEl.style.transform='translateY(24px)';
     preEl.style.opacity='0';subEl.style.opacity='0';
     setTimeout(()=>{
       const p=phrases[idx];
@@ -637,22 +409,15 @@ updateSticky();
       mainEl.style.opacity='1';mainEl.style.transform='translateY(0)';
       setTimeout(()=>{preEl.style.opacity='1';subEl.style.opacity='1'},100);
     },350);
-    dots.forEach((d,i)=>{
-      d.style.background=i===idx?'var(--gold)':'rgba(201,168,76,.3)';
-      d.style.width=i===idx?'20px':'6px';
-      d.style.borderRadius='3px';
-    });
+    dots.forEach((d,i)=>d.classList.toggle('on',i===idx));
   }
-  function next(){showPhrase((current+1)%phrases.length)}
-  mainEl.style.transition='opacity .5s ease,transform .5s ease';
-  preEl.style.transition='opacity .4s ease .1s';
-  subEl.style.transition='opacity .4s ease .2s';
+  function next(){showPhrase((cur+1)%phrases.length)}
   showPhrase(0);
-  timer=setInterval(next,3000);
-  const section=mainEl.closest('section');
-  if(section){
-    section.addEventListener('mouseenter',()=>clearInterval(timer));
-    section.addEventListener('mouseleave',()=>{timer=setInterval(next,3000)});
+  timer=setInterval(next,3200);
+  const sec=mainEl.closest('section');
+  if(sec){
+    sec.addEventListener('mouseenter',()=>clearInterval(timer));
+    sec.addEventListener('mouseleave',()=>{timer=setInterval(next,3200)});
   }
 })();
 
@@ -660,41 +425,24 @@ updateSticky();
 const canvas=document.getElementById('particles');
 if(canvas){
   const ctx=canvas.getContext('2d');
-  let particles=[];
-  function resizeCanvas(){canvas.width=canvas.offsetWidth;canvas.height=canvas.offsetHeight}
-  resizeCanvas();
-  let resizeTimer;
-  window.addEventListener('resize',()=>{
-    clearTimeout(resizeTimer);
-    resizeTimer=setTimeout(()=>{
-      resizeCanvas();
-      particles=particles.map(p=>({...p,x:Math.random()*canvas.width,y:Math.random()*canvas.height}));
-    },150);
-  });
-  for(let i=0;i<80;i++){
-    particles.push({x:Math.random()*canvas.width,y:Math.random()*canvas.height,r:Math.random()*1.5+.5,vx:(Math.random()-.5)*.3,vy:(Math.random()-.5)*.3,o:Math.random()*.6+.2});
-  }
-  let rafId=null;
-  function animParticles(){
+  let pts=[];
+  function resize(){canvas.width=canvas.offsetWidth;canvas.height=canvas.offsetHeight}
+  resize();
+  let rt;
+  window.addEventListener('resize',()=>{clearTimeout(rt);rt=setTimeout(()=>{resize();pts=pts.map(p=>({...p,x:Math.random()*canvas.width,y:Math.random()*canvas.height}))},150)});
+  for(let i=0;i<70;i++)pts.push({x:Math.random()*canvas.width,y:Math.random()*canvas.height,r:Math.random()*1.4+.4,vx:(Math.random()-.5)*.25,vy:(Math.random()-.5)*.25,o:Math.random()*.55+.15});
+  (function anim(){
     ctx.clearRect(0,0,canvas.width,canvas.height);
-    particles.forEach(p=>{
+    pts.forEach(p=>{
       ctx.beginPath();ctx.arc(p.x,p.y,p.r,0,Math.PI*2);
       ctx.fillStyle=`rgba(201,168,76,${p.o})`;ctx.fill();
       p.x+=p.vx;p.y+=p.vy;
       if(p.x<0)p.x=canvas.width;if(p.x>canvas.width)p.x=0;
       if(p.y<0)p.y=canvas.height;if(p.y>canvas.height)p.y=0;
     });
-    rafId=requestAnimationFrame(animParticles);
-  }
-  animParticles();
+    requestAnimationFrame(anim);
+  })();
 }
-
-// PARALLAX
-window.addEventListener('scroll',()=>{
-  document.querySelectorAll('.par-bg').forEach(el=>{
-    el.style.transform=`translateY(${window.scrollY*.15}px)`;
-  });
-},{passive:true});
 </script>
 </body>
 </html>
