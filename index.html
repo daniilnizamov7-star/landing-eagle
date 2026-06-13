@@ -39,8 +39,8 @@ nav::before{content:'';position:absolute;inset:0;background:linear-gradient(to b
 
 /* HERO */
 .hero{height:100vh;position:relative;display:flex;align-items:center;justify-content:center;overflow:hidden}
-.hero-video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:.85}
-.hero-bg{position:absolute;inset:0;background:radial-gradient(ellipse at center,rgba(0,0,0,.1) 0%,rgba(0,0,0,.55) 100%)}
+.hero-video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:1}
+.hero-bg{position:absolute;inset:0;background:linear-gradient(to bottom,rgba(0,0,0,.4) 0%,rgba(0,0,0,.2) 40%,rgba(0,0,0,.6) 100%)}
 /* Fallback SVG если нет видео */
 .hero-svg-bg{position:absolute;inset:0;width:100%;height:100%}
 .hero-content{position:relative;z-index:2;text-align:center;padding:0 24px;margin-top:-60px}
@@ -194,7 +194,7 @@ footer .f-copy{font-size:11px;color:var(--muted);letter-spacing:1px}
 
 <!-- HERO -->
 <section class="hero" id="hero">
-  <video class="hero-video" autoplay muted loop playsinline src="eagle-hero.mp4" style="object-position:center center"></video>
+  <video class="hero-video" autoplay muted loop playsinline src="eagle-hero.mp4" style="object-position:center center;opacity:1!important"></video>
   <svg class="hero-svg-bg" viewBox="0 0 1440 900" preserveAspectRatio="xMidYMid slice">
     <defs>
       <radialGradient id="hg" cx="50%" cy="50%" r="70%">
@@ -470,81 +470,67 @@ footer .f-copy{font-size:11px;color:var(--muted);letter-spacing:1px}
 </div>
 
 <!-- SECTION 3 — POWER -->
-<section class="section" id="power" style="background:#000;isolation:isolate">
-  <video autoplay muted loop playsinline src="eagle-eye.mp4"
-    style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:.4;z-index:0"
-    onloadeddata="document.getElementById('power-overlay').style.background='linear-gradient(90deg,rgba(0,0,0,.95) 0%,rgba(0,0,0,.8) 50%,rgba(0,0,0,.4) 100%)'"></video>
-  <div id="power-overlay" style="position:absolute;inset:0;z-index:1;background:radial-gradient(ellipse at 30% 50%,rgba(201,168,76,.05),transparent 60%);transition:background .5s"></div>
-  <div class="section-inner">
-    <div class="reveal-left">
-      <div class="section-tag">03 — Сила</div>
-      <h2 class="section-h2">Сжимает<br><em>сталь</em></h2>
-      <p class="section-p">Лапы беркута сжимают добычу с усилием 300 кг/см² — в 10 раз сильнее человеческой руки. Никакого бегства.</p>
-      <div class="section-fact">
+<section id="power" style="min-height:100vh;position:relative;overflow:hidden;display:flex;align-items:center">
+  <!-- Видео на весь экран — eagle-power.mp4 когда будет готово -->
+  <!-- <video autoplay muted loop playsinline src="eagle-power.mp4"
+    style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:.6"></video> -->
+  <!-- Пока SVG фон -->
+  <div style="position:absolute;inset:0;background:radial-gradient(ellipse at 70% 40%,#1a0800,#000)">
+    <svg style="position:absolute;inset:0;width:100%;height:100%" viewBox="0 0 1440 900" preserveAspectRatio="xMidYMid slice" opacity=".4">
+      <line x1="0" y1="200" x2="1440" y2="350" stroke="#C9A84C" stroke-width="0.5" opacity=".2"/>
+      <line x1="0" y1="400" x2="1440" y2="500" stroke="#C9A84C" stroke-width="0.5" opacity=".15"/>
+      <line x1="0" y1="600" x2="1440" y2="650" stroke="#C9A84C" stroke-width="0.5" opacity=".1"/>
+      <!-- Когти крупным планом -->
+      <g transform="translate(900,450) scale(4)" opacity=".6">
+        <path d="M0,0 C5,-15 15,-25 20,-40 C22,-30 18,-15 15,0" fill="#2a1800"/>
+        <path d="M0,0 C-5,-15 -15,-25 -20,-40 C-22,-30 -18,-15 -15,0" fill="#2a1800"/>
+        <path d="M5,-5 C15,-20 30,-35 45,-55 C42,-40 35,-22 25,-5" fill="#1a1000"/>
+        <path d="M-5,-5 C-15,-20 -30,-35 -45,-55 C-42,-40 -35,-22 -25,-5" fill="#1a1000"/>
+        <ellipse cx="0" cy="5" rx="18" ry="8" fill="#C9A84C" opacity=".3"/>
+      </g>
+    </svg>
+  </div>
+  <!-- Градиент справа→лево (текст справа) -->
+  <div style="position:absolute;inset:0;background:linear-gradient(270deg,rgba(0,0,0,.92) 0%,rgba(0,0,0,.7) 45%,rgba(0,0,0,.2) 70%,transparent 100%)"></div>
+  <!-- Контент справа -->
+  <div style="position:relative;z-index:2;max-width:1200px;margin:0 auto;padding:80px 48px;width:100%;display:flex;justify-content:flex-end">
+    <div style="max-width:560px">
+      <div class="section-tag reveal-right">03 — Сила</div>
+      <h2 class="section-h2 reveal-right">Сжимает<br><span class="calli" style="font-size:clamp(56px,8vw,100px)">сталь</span></h2>
+      <p class="section-p reveal-right">Лапы беркута сжимают добычу с усилием 300 кг/см² — в 10 раз сильнее человеческой руки. Никакого бегства.</p>
+      <div class="section-fact reveal-right" style="background:rgba(0,0,0,.4);backdrop-filter:blur(8px);border-color:rgba(201,168,76,.2)">
         <div class="fact-num">300</div>
         <div class="fact-text">кг/см² — давление когтей. Кость ломается мгновенно, добыча не успевает почувствовать боль</div>
       </div>
-      <div class="section-fact">
+      <div class="section-fact reveal-right" style="background:rgba(0,0,0,.4);backdrop-filter:blur(8px);border-color:rgba(201,168,76,.2)">
         <div class="fact-num">6 кг</div>
         <div class="fact-text">максимальная добыча — молодой олень или лиса. Вес в 1.5 раза превышает вес орла</div>
       </div>
     </div>
-    <div class="reveal-right">
-      <div class="vid-block">
-        <div class="vid-block-fallback">
-          <div class="vid-glow"></div>
-          <svg style="position:absolute;inset:0;width:100%;height:100%" viewBox="0 0 640 360" preserveAspectRatio="xMidYMid slice">
-            <defs>
-              <radialGradient id="pwrg" cx="50%" cy="30%" r="60%">
-                <stop offset="0%" stop-color="#100800"/>
-                <stop offset="100%" stop-color="#000"/>
-              </radialGradient>
-            </defs>
-            <rect width="640" height="360" fill="url(#pwrg)"/>
-            <!-- горы снизу -->
-            <path d="M0 360 L160 180 L280 260 L400 140 L520 220 L640 160 L640 360Z" fill="#0a0500" opacity=".9"/>
-            <path d="M0 360 L100 240 L220 300 L340 200 L460 270 L580 230 L640 260 L640 360Z" fill="#050200" opacity=".95"/>
-            <!-- орёл сверху крупно -->
-            <g transform="translate(320,100) scale(2.5)">
-              <ellipse cx="0" cy="0" rx="20" ry="7" fill="#1a1200"/>
-              <path d="M-20,0 C-55,-12 -90,-5 -105,5 C-75,-2 -45,4 -20,0Z" fill="#2a1e00"/>
-              <path d="M20,0 C55,-12 90,-5 105,5 C75,-2 45,4 20,0Z" fill="#2a1e00"/>
-              <ellipse cx="24" cy="-6" rx="11" ry="9" fill="#C9A84C" opacity=".85"/>
-              <ellipse cx="24" cy="-6" rx="8" ry="7" fill="#100800"/>
-              <path d="M33,-8 L43,-5 L33,-3Z" fill="#C9A84C"/>
-              <ellipse cx="28" cy="-8" rx="3" ry="2.5" fill="#C9A84C"/>
-              <ellipse cx="28.5" cy="-8" rx="1.5" ry="1.2" fill="#000"/>
-              <circle cx="29" cy="-8.5" r=".5" fill="#fff" opacity=".8"/>
-            </g>
-            <!-- золотое свечение -->
-            <ellipse cx="320" cy="110" rx="120" ry="30" fill="#C9A84C" opacity="0.04"/>
-            <!-- когти внизу -->
-            <g transform="translate(310,165)" opacity=".6">
-              <path d="M0,0 L-8,20 L-12,28 M-8,20 L-4,26 M-8,20 L-15,18" stroke="#C9A84C" stroke-width="1.5" fill="none"/>
-              <path d="M10,0 L18,20 L22,28 M18,20 L14,26 M18,20 L25,18" stroke="#C9A84C" stroke-width="1.5" fill="none"/>
-            </g>
-            <text x="50%" y="92%" text-anchor="middle" font-family="Montserrat,sans-serif" font-weight="900" font-size="10" fill="#C9A84C" opacity="0.4" letter-spacing="4">300 КГ/СМ² · ВИДЕО СКОРО</text>
-          </svg>
-          <div class="vid-frame"></div>
-        </div>
-      </div>
-    </div>
   </div>
+  <div style="position:absolute;bottom:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,rgba(201,168,76,.3),transparent)"></div>
 </section>
+
+
+
+<!-- QUOTE -->
+<div class="quote-section reveal">
+  <div class="quote-mark">"</div>
+  <p class="quote-text">Орёл не борется со штормом — он <em>использует его</em>, поднимаясь выше туч, пока маленькие птицы прячутся</p>
+  <div class="quote-author">— Древняя мудрость</div>
+</div>
 
 <!-- FINAL -->
 <section class="final" id="freedom">
   <div class="final-bg"></div>
-
-  <!-- Анимированные частицы -->
+  <!-- eagle-freedom.mp4 — поставь когда сгенеришь -->
+  <!-- <video autoplay muted loop playsinline src="eagle-freedom.mp4"
+    style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:.5"></video> -->
   <canvas id="particles" style="position:absolute;inset:0;width:100%;height:100%;opacity:.4"></canvas>
-
-  <div style="position:relative;z-index:2">
+  <div style="position:relative;z-index:2;text-align:center;padding:40px">
     <div class="reveal">
-      <h2 class="final-h">
-        <span>Рождён для</span>
-        СВОБОДЫ
-      </h2>
+      <div style="font-family:'Montserrat',sans-serif;font-weight:100;font-size:clamp(11px,1.5vw,16px);letter-spacing:8px;text-transform:uppercase;color:rgba(245,240,232,.4);margin-bottom:12px">Рождён для</div>
+      <div class="calli" style="font-size:clamp(80px,14vw,180px);display:block;margin-bottom:24px">Свободы</div>
       <p style="font-size:14px;letter-spacing:3px;text-transform:uppercase;color:var(--muted);margin-bottom:40px;font-weight:300">Беркут · Символ силы и независимости</p>
       <div class="final-btns">
         <button class="btn-gold">Узнать больше</button>
@@ -563,10 +549,9 @@ footer .f-copy{font-size:11px;color:var(--muted);letter-spacing:1px}
 <script>
 // CURSOR
 const cur=document.getElementById('cursor');
-let cx=0,cy=0;
 document.addEventListener('mousemove',e=>{
-  cx=e.clientX;cy=e.clientY;
-  cur.style.left=cx+'px';cur.style.top=cy+'px';
+  cur.style.left=e.clientX+'px';
+  cur.style.top=e.clientY+'px';
 });
 document.querySelectorAll('a,button,.section-fact,.stat').forEach(el=>{
   el.addEventListener('mouseenter',()=>cur.classList.add('hovering'));
@@ -616,143 +601,100 @@ function updateSticky(){
   const scrolled=-rect.top;
   const pct=Math.max(0,Math.min(1,scrolled/total));
   const idx=Math.min(slides.length-1,Math.floor(pct*slides.length));
-  slides.forEach((s,i)=>{
-    s.classList.toggle('active',i===idx);
-  });
+  slides.forEach((s,i)=>{s.classList.toggle('active',i===idx)});
 }
 window.addEventListener('scroll',updateSticky,{passive:true});
 updateSticky();
 
-// PARTICLES
-const canvas=document.getElementById('particles');
-const ctx=canvas.getContext('2d');
-let particles=[];
-function resizeCanvas(){
-  canvas.width=canvas.offsetWidth;
-  canvas.height=canvas.offsetHeight;
-}
-resizeCanvas();
-let resizeTimer;
-window.addEventListener('resize',()=>{
-  clearTimeout(resizeTimer);
-  resizeTimer=setTimeout(()=>{
-    resizeCanvas();
-    // Пересоздаём частицы под новый размер
-    particles=particles.map(p=>({...p,
-      x:Math.random()*canvas.width,
-      y:Math.random()*canvas.height
-    }));
-  },150);
-});
-for(let i=0;i<80;i++){
-  particles.push({
-    x:Math.random()*canvas.width,
-    y:Math.random()*canvas.height,
-    r:Math.random()*1.5+.5,
-    vx:(Math.random()-.5)*.3,
-    vy:(Math.random()-.5)*.3,
-    o:Math.random()*.6+.2
-  });
-}
-let rafId=null;
-function animParticles(){
-  ctx.clearRect(0,0,canvas.width,canvas.height);
-  particles.forEach(p=>{
-    ctx.beginPath();
-    ctx.arc(p.x,p.y,p.r,0,Math.PI*2);
-    ctx.fillStyle=`rgba(201,168,76,${p.o})`;
-    ctx.fill();
-    p.x+=p.vx;p.y+=p.vy;
-    if(p.x<0)p.x=canvas.width;
-    if(p.x>canvas.width)p.x=0;
-    if(p.y<0)p.y=canvas.height;
-    if(p.y>canvas.height)p.y=0;
-  });
-  rafId=requestAnimationFrame(animParticles);
-}
-animParticles();
-
-// PARALLAX на фоне секций
-window.addEventListener('scroll',()=>{
-  const y=window.scrollY;
-  document.querySelectorAll('.par-bg').forEach(el=>{
-    el.style.transform=`translateY(${y*.15}px)`;
-  });
-},{passive:true});
-
-// SCROLL-DRIVEN TEXT
+// AUTO TEXT ANIMATION
 (function(){
-  const wrap = document.getElementById('scroll-text-wrap');
-  if(!wrap) return;
-
-  const phrases = [
-    {el: document.getElementById('phrase-1'), words: ['w1-1','w1-2'], sub: 'w1-sub'},
-    {el: document.getElementById('phrase-2'), words: ['w2-1','w2-2'], sub: 'w2-sub'},
-    {el: document.getElementById('phrase-3'), words: ['w3-1','w3-2'], sub: 'w3-sub'},
-    {el: document.getElementById('phrase-4'), words: ['w4-1','w4-2'], sub: 'w4-sub'},
+  const phrases=[
+    {pre:'Беркут',main:'Рождён',sub:'Властелин небес · Aquila Chrysaetos'},
+    {pre:'Скорость',main:'320 км/ч',sub:'Быстрее гоночного болида'},
+    {pre:'Зрение',main:'Видит всё',sub:'В 8 раз острее человеческого'},
+    {pre:'Свобода',main:'Без границ',sub:'4 500 метров над землёй'},
   ];
-
-  const ring = document.getElementById('ring-fill');
-  const ringPct = document.getElementById('ring-pct');
-  const hint = document.getElementById('scroll-hint-st');
-  const CIRC = 2 * Math.PI * 22;
-
-  let lastPhrase = -1;
-
-  function updateScrollText(){
-    const rect = wrap.getBoundingClientRect();
-    const total = wrap.offsetHeight - window.innerHeight;
-    if(total <= 0) return;
-    const scrolled = -rect.top;
-    const pct = Math.max(0, Math.min(1, scrolled / total));
-
-    // Прогресс кольцо
-    const offset = CIRC - pct * CIRC;
-    ring.style.strokeDashoffset = offset;
-    ringPct.textContent = Math.round(pct * 100) + '%';
-
-    // Скрываем подсказку после начала скролла
-    if(pct > 0.02) hint.classList.add('hide');
-    else hint.classList.remove('hide');
-
-    // Определяем текущую фразу
-    const phraseIdx = Math.min(phrases.length - 1, Math.floor(pct * phrases.length));
-
-    if(phraseIdx === lastPhrase) return;
-    lastPhrase = phraseIdx;
-
-    // Переключаем фразы
-    phrases.forEach((p, i) => {
-      if(i === phraseIdx){
-        p.el.style.opacity = '1';
-        // Анимируем слова с задержкой
-        p.words.forEach((wid, wi) => {
-          const el = document.getElementById(wid);
-          if(!el) return;
-          el.classList.remove('show');
-          setTimeout(() => el.classList.add('show'), wi * 150);
-        });
-        const subEl = document.getElementById(p.sub);
-        if(subEl){
-          subEl.classList.remove('show');
-          setTimeout(() => subEl.classList.add('show'), p.words.length * 150 + 100);
-        }
-      } else {
-        p.el.style.opacity = '0';
-        p.words.forEach(wid => {
-          const el = document.getElementById(wid);
-          if(el) el.classList.remove('show');
-        });
-        const subEl = document.getElementById(p.sub);
-        if(subEl) subEl.classList.remove('show');
-      }
+  const preEl=document.getElementById('auto-pre');
+  const mainEl=document.getElementById('auto-main');
+  const subEl=document.getElementById('auto-sub');
+  const dotsWrap=document.getElementById('auto-dots');
+  if(!preEl||!mainEl)return;
+  const dots=phrases.map((_,i)=>{
+    const d=document.createElement('div');
+    d.style.cssText='width:6px;height:6px;border-radius:50%;background:rgba(201,168,76,.3);transition:all .3s;cursor:pointer';
+    d.onclick=()=>{showPhrase(i);clearInterval(timer);timer=setInterval(next,3000)};
+    dotsWrap&&dotsWrap.appendChild(d);
+    return d;
+  });
+  let current=0,timer=null;
+  function showPhrase(idx){
+    current=idx;
+    mainEl.style.opacity='0';mainEl.style.transform='translateY(20px)';
+    preEl.style.opacity='0';subEl.style.opacity='0';
+    setTimeout(()=>{
+      const p=phrases[idx];
+      preEl.textContent=p.pre;mainEl.textContent=p.main;subEl.textContent=p.sub;
+      mainEl.style.opacity='1';mainEl.style.transform='translateY(0)';
+      setTimeout(()=>{preEl.style.opacity='1';subEl.style.opacity='1'},100);
+    },350);
+    dots.forEach((d,i)=>{
+      d.style.background=i===idx?'var(--gold)':'rgba(201,168,76,.3)';
+      d.style.width=i===idx?'20px':'6px';
+      d.style.borderRadius='3px';
     });
   }
-
-  window.addEventListener('scroll', updateScrollText, {passive: true});
-  updateScrollText();
+  function next(){showPhrase((current+1)%phrases.length)}
+  mainEl.style.transition='opacity .5s ease,transform .5s ease';
+  preEl.style.transition='opacity .4s ease .1s';
+  subEl.style.transition='opacity .4s ease .2s';
+  showPhrase(0);
+  timer=setInterval(next,3000);
+  const section=mainEl.closest('section');
+  if(section){
+    section.addEventListener('mouseenter',()=>clearInterval(timer));
+    section.addEventListener('mouseleave',()=>{timer=setInterval(next,3000)});
+  }
 })();
 
+// PARTICLES
+const canvas=document.getElementById('particles');
+if(canvas){
+  const ctx=canvas.getContext('2d');
+  let particles=[];
+  function resizeCanvas(){canvas.width=canvas.offsetWidth;canvas.height=canvas.offsetHeight}
+  resizeCanvas();
+  let resizeTimer;
+  window.addEventListener('resize',()=>{
+    clearTimeout(resizeTimer);
+    resizeTimer=setTimeout(()=>{
+      resizeCanvas();
+      particles=particles.map(p=>({...p,x:Math.random()*canvas.width,y:Math.random()*canvas.height}));
+    },150);
+  });
+  for(let i=0;i<80;i++){
+    particles.push({x:Math.random()*canvas.width,y:Math.random()*canvas.height,r:Math.random()*1.5+.5,vx:(Math.random()-.5)*.3,vy:(Math.random()-.5)*.3,o:Math.random()*.6+.2});
+  }
+  let rafId=null;
+  function animParticles(){
+    ctx.clearRect(0,0,canvas.width,canvas.height);
+    particles.forEach(p=>{
+      ctx.beginPath();ctx.arc(p.x,p.y,p.r,0,Math.PI*2);
+      ctx.fillStyle=`rgba(201,168,76,${p.o})`;ctx.fill();
+      p.x+=p.vx;p.y+=p.vy;
+      if(p.x<0)p.x=canvas.width;if(p.x>canvas.width)p.x=0;
+      if(p.y<0)p.y=canvas.height;if(p.y>canvas.height)p.y=0;
+    });
+    rafId=requestAnimationFrame(animParticles);
+  }
+  animParticles();
+}
+
+// PARALLAX
+window.addEventListener('scroll',()=>{
+  document.querySelectorAll('.par-bg').forEach(el=>{
+    el.style.transform=`translateY(${window.scrollY*.15}px)`;
+  });
+},{passive:true});
 </script>
 </body>
 </html>
