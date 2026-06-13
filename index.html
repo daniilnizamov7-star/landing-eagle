@@ -39,11 +39,11 @@ nav::before{content:'';position:absolute;inset:0;background:linear-gradient(to b
 
 /* HERO */
 .hero{height:100vh;position:relative;display:flex;align-items:center;justify-content:center;overflow:hidden}
-.hero-video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:.6}
-.hero-bg{position:absolute;inset:0;background:radial-gradient(ellipse at center,rgba(0,0,0,.3) 0%,rgba(0,0,0,.75) 100%)}
+.hero-video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:.85}
+.hero-bg{position:absolute;inset:0;background:radial-gradient(ellipse at center,rgba(0,0,0,.1) 0%,rgba(0,0,0,.55) 100%)}
 /* Fallback SVG если нет видео */
 .hero-svg-bg{position:absolute;inset:0;width:100%;height:100%}
-.hero-content{position:relative;z-index:2;text-align:center;padding:0 24px}
+.hero-content{position:relative;z-index:2;text-align:center;padding:0 24px;margin-top:-60px}
 .hero-eyebrow{font-size:11px;letter-spacing:6px;text-transform:uppercase;color:var(--gold);margin-bottom:24px;opacity:0;animation:fadeUp .8s ease .3s forwards}
 .hero-h1{font-family:'Montserrat',sans-serif;font-weight:900;font-size:clamp(72px,14vw,180px);line-height:.9;letter-spacing:-4px;color:var(--text);opacity:0;animation:fadeUp .8s ease .5s forwards}
 .hero-h1 span{color:var(--gold);display:block}
@@ -517,9 +517,39 @@ footer .f-copy{font-size:11px;color:var(--muted);letter-spacing:1px}
       <div class="vid-block">
         <div class="vid-block-fallback">
           <div class="vid-glow"></div>
-          <div style="font-size:60px;z-index:1">🌄</div>
+          <svg style="position:absolute;inset:0;width:100%;height:100%" viewBox="0 0 640 360" preserveAspectRatio="xMidYMid slice">
+            <defs>
+              <radialGradient id="pwrg" cx="50%" cy="30%" r="60%">
+                <stop offset="0%" stop-color="#100800"/>
+                <stop offset="100%" stop-color="#000"/>
+              </radialGradient>
+            </defs>
+            <rect width="640" height="360" fill="url(#pwrg)"/>
+            <!-- горы снизу -->
+            <path d="M0 360 L160 180 L280 260 L400 140 L520 220 L640 160 L640 360Z" fill="#0a0500" opacity=".9"/>
+            <path d="M0 360 L100 240 L220 300 L340 200 L460 270 L580 230 L640 260 L640 360Z" fill="#050200" opacity=".95"/>
+            <!-- орёл сверху крупно -->
+            <g transform="translate(320,100) scale(2.5)">
+              <ellipse cx="0" cy="0" rx="20" ry="7" fill="#1a1200"/>
+              <path d="M-20,0 C-55,-12 -90,-5 -105,5 C-75,-2 -45,4 -20,0Z" fill="#2a1e00"/>
+              <path d="M20,0 C55,-12 90,-5 105,5 C75,-2 45,4 20,0Z" fill="#2a1e00"/>
+              <circle cx="22" cy="-4" r="9" fill="#C9A84C" opacity=".9"/>
+              <circle cx="22" cy="-4" r="6" fill="#100800"/>
+              <path d="M29,-6 L38,-3 L29,-2Z" fill="#C9A84C"/>
+              <circle cx="25" cy="-6" r="2.5" fill="#C9A84C"/>
+              <circle cx="25.5" cy="-6" r="1.2" fill="#000"/>
+              <circle cx="26" cy="-6.5" r=".5" fill="#fff" opacity=".8"/>
+            </g>
+            <!-- золотое свечение -->
+            <ellipse cx="320" cy="110" rx="120" ry="30" fill="#C9A84C" opacity="0.04"/>
+            <!-- когти внизу -->
+            <g transform="translate(310,165)" opacity=".6">
+              <path d="M0,0 L-8,20 L-12,28 M-8,20 L-4,26 M-8,20 L-15,18" stroke="#C9A84C" stroke-width="1.5" fill="none"/>
+              <path d="M10,0 L18,20 L22,28 M18,20 L14,26 M18,20 L25,18" stroke="#C9A84C" stroke-width="1.5" fill="none"/>
+            </g>
+            <text x="50%" y="92%" text-anchor="middle" font-family="Montserrat,sans-serif" font-weight="900" font-size="10" fill="#C9A84C" opacity="0.4" letter-spacing="4">300 КГ/СМ² · ВИДЕО СКОРО</text>
+          </svg>
           <div class="vid-frame"></div>
-          <div style="position:absolute;bottom:16px;left:0;right:0;text-align:center;font-size:10px;letter-spacing:2px;color:rgba(201,168,76,.4);text-transform:uppercase">Пике над горами</div>
         </div>
       </div>
     </div>
