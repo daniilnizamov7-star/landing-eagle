@@ -84,11 +84,11 @@ nav::before{content:'';position:absolute;inset:0;background:linear-gradient(to b
 .section-tag::before{content:'';width:28px;height:1px;background:var(--gold)}
 .section-h2{font-family:'Montserrat',sans-serif;font-weight:900;font-size:clamp(38px,5.5vw,68px);line-height:1;letter-spacing:-2px;margin-bottom:20px}
 .section-h2 .calli{font-family:'Marck Script',cursive;font-size:1.25em;color:var(--gold);display:block;letter-spacing:0;line-height:.9;text-shadow:0 0 50px rgba(201,168,76,.3)}
-.section-p{font-size:15px;color:var(--muted);line-height:1.8;font-weight:300;margin-bottom:28px}
+.section-p{font-size:15px;color:rgba(245,240,232,.8);line-height:1.8;font-weight:300;margin-bottom:28px}
 .fact{display:flex;align-items:flex-start;gap:14px;padding:14px 18px;border:1px solid rgba(201,168,76,.12);border-radius:4px;margin-bottom:12px;background:rgba(0,0,0,.35);backdrop-filter:blur(8px);transition:border-color .3s}
 .fact:hover{border-color:rgba(201,168,76,.3)}
 .fact-n{font-family:'Montserrat',sans-serif;font-weight:900;font-size:24px;color:var(--gold);letter-spacing:-1px;min-width:64px;line-height:1}
-.fact-t{font-size:12px;color:var(--muted);line-height:1.6;padding-top:3px}
+.fact-t{font-size:12px;color:rgba(245,240,232,.75);line-height:1.6;padding-top:3px}
 
 /* STICKY */
 .sticky-wrap{position:relative;height:300vh}
@@ -163,12 +163,16 @@ footer{padding:36px 48px;border-top:1px solid rgba(255,255,255,.05);display:flex
 <section class="hero" id="hero">
   <video class="hero-video" autoplay muted loop playsinline src="eagle-hero.mp4"></video>
   <div class="hero-overlay"></div>
-  <div class="hero-content">
-    <div class="hero-eyebrow">Беркут · Aquila chrysaetos</div>
-    <h1 class="hero-h1">EAGLE<span>Свобода</span></h1>
+  <!-- Текст сверху -->
+  <div style="position:absolute;top:90px;left:0;right:0;text-align:center;z-index:2;opacity:0;animation:fadeUp .8s ease .3s forwards">
+    <div style="font-size:11px;letter-spacing:6px;text-transform:uppercase;color:var(--gold);font-weight:300">Беркут · Aquila chrysaetos</div>
+  </div>
+  <!-- Текст снизу -->
+  <div style="position:absolute;bottom:80px;left:0;right:0;text-align:center;z-index:2;padding:0 24px;opacity:0;animation:fadeUp .8s ease .5s forwards">
+    <h1 class="hero-h1" style="margin-bottom:8px">EAGLE<span>Свобода</span></h1>
     <div class="hero-sub">Властелин небес · Хозяин горизонта</div>
   </div>
-  <div class="hero-scroll-hint">
+  <div class="hero-scroll-hint" style="bottom:28px">
     <div class="scroll-line"></div>
     <span>Листай</span>
   </div>
