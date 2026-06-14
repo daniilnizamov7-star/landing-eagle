@@ -92,8 +92,8 @@ nav::before{content:'';position:absolute;inset:0;background:linear-gradient(to b
 
 /* STICKY */
 .sticky-wrap{position:relative;height:300vh}
-.sticky-inner{position:sticky;top:0;height:100vh;overflow:hidden}
-.sticky-slide{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;opacity:0;transition:opacity .5s}
+.sticky-inner{position:sticky;top:0;height:100vh;overflow:hidden;background-image:url(eagle-cliff.jpg);background-size:cover;background-position:center right}
+.sticky-slide{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;opacity:0;transition:opacity .4s ease}
 .sticky-slide.active{opacity:1}
 .slide-bg{position:absolute;inset:0}
 .slide-ov{position:absolute;inset:0;background:rgba(0,0,0,.6)}
@@ -113,9 +113,9 @@ nav::before{content:'';position:absolute;inset:0;background:linear-gradient(to b
 
 /* FINAL */
 .final{height:100vh;display:flex;align-items:center;justify-content:center;text-align:center;position:relative;overflow:hidden;padding:40px}
-.final-bg{position:absolute;inset:0;background:radial-gradient(ellipse at 50% 55%,rgba(201,168,76,.1),transparent 65%)}
-.final-video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:.45}
-.final-ov{position:absolute;inset:0;background:rgba(0,0,0,.55)}
+.final-bg{position:absolute;inset:0;background:radial-gradient(ellipse at 50% 55%,rgba(201,168,76,.08),transparent 65%);z-index:0}
+.final-video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:1;z-index:0}
+.final-ov{position:absolute;inset:0;background:rgba(0,0,0,.35);z-index:0}
 .final-h{font-family:'Montserrat',sans-serif;font-weight:900;font-size:clamp(42px,9vw,120px);line-height:.9;letter-spacing:-3px;margin-bottom:28px}
 .final-pre{display:block;font-weight:100;font-size:.3em;letter-spacing:8px;color:rgba(245,240,232,.5);text-transform:uppercase;margin-bottom:8px}
 .final-calli{font-family:'Marck Script',cursive;font-size:.9em;color:var(--gold);display:block;letter-spacing:0;text-shadow:0 0 80px rgba(201,168,76,.4)}
@@ -232,7 +232,7 @@ footer{padding:36px 48px;border-top:1px solid rgba(255,255,255,.05);display:flex
   <div class="sticky-inner">
     <div class="sticky-slide" id="slide-1">
       <div class="slide-bg" style="background-image:url(eagle-cliff.jpg);background-size:cover;background-position:center right"></div>
-      <div style="position:absolute;inset:0;background:rgba(0,0,0,.55)"></div>
+      <div style="position:absolute;inset:0;background:rgba(0,0,0,.25)"></div>
       <div class="slide-ov"></div>
       
       <div class="slide-txt">
@@ -243,7 +243,7 @@ footer{padding:36px 48px;border-top:1px solid rgba(255,255,255,.05);display:flex
     </div>
     <div class="sticky-slide" id="slide-2">
       <div class="slide-bg" style="background-image:url(eagle-cliff.jpg);background-size:cover;background-position:center right"></div>
-      <div style="position:absolute;inset:0;background:rgba(0,0,0,.55)"></div>
+      <div style="position:absolute;inset:0;background:rgba(0,0,0,.25)"></div>
       <div class="slide-ov"></div>
       
       <div class="slide-txt">
@@ -254,7 +254,7 @@ footer{padding:36px 48px;border-top:1px solid rgba(255,255,255,.05);display:flex
     </div>
     <div class="sticky-slide" id="slide-3">
       <div class="slide-bg" style="background-image:url(eagle-cliff.jpg);background-size:cover;background-position:center right"></div>
-      <div style="position:absolute;inset:0;background:rgba(0,0,0,.55)"></div>
+      <div style="position:absolute;inset:0;background:rgba(0,0,0,.25)"></div>
       <div class="slide-ov"></div>
       
       <div class="slide-txt">
@@ -319,12 +319,12 @@ footer{padding:36px 48px;border-top:1px solid rgba(255,255,255,.05);display:flex
 
 <!-- FINAL / FREEDOM -->
 <section class="final" id="freedom">
+  <!-- Когда получишь eagle-freedom.mp4 — раскомментируй две строки ниже: -->
+  <!-- <video class="final-video" autoplay muted loop playsinline src="eagle-freedom.mp4"></video> -->
+  <!-- <div class="final-ov"></div> -->
   <div class="final-bg"></div>
-  <!-- Раскомментируй когда получишь eagle-freedom.mp4:
-  <video class="final-video" autoplay muted loop playsinline src="eagle-freedom.mp4"></video>
-  <div class="final-ov"></div> -->
-  <canvas id="particles" style="position:absolute;inset:0;width:100%;height:100%;opacity:.5"></canvas>
-  <div style="position:relative;z-index:2">
+  <canvas id="particles" style="position:absolute;inset:0;width:100%;height:100%;opacity:.3;z-index:1;pointer-events:none"></canvas>
+  <div style="position:relative;z-index:3">
     <div class="reveal">
       <h2 class="final-h">
         <span class="final-pre">Рождён для</span>
