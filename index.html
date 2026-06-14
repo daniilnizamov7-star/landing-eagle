@@ -44,7 +44,7 @@ nav::before{content:'';position:absolute;inset:0;background:linear-gradient(to b
 .hero-h1{font-family:'Montserrat',sans-serif;font-weight:900;font-size:clamp(72px,13vw,170px);line-height:.9;letter-spacing:-4px;opacity:0;animation:fadeUp .8s ease .5s forwards}
 .hero-h1 span{font-family:'Marck Script',cursive;font-size:.75em;color:var(--gold);display:block;letter-spacing:0;text-shadow:0 0 60px rgba(201,168,76,.4)}
 .hero-sub{font-size:clamp(11px,1.5vw,14px);letter-spacing:4px;text-transform:uppercase;color:var(--muted);margin-top:20px;font-weight:300;opacity:0;animation:fadeUp .8s ease .7s forwards}
-.hero-scroll-hint{position:absolute;bottom:36px;left:50%;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:8px;opacity:0;animation:fadeUp .8s ease 1.2s forwards;z-index:2}
+.hero-scroll-hint{position:absolute;bottom:36px;left:calc(50% - 50px);transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:8px;opacity:0;animation:fadeUp .8s ease 1.2s forwards;z-index:2}
 .hero-scroll-hint span{font-size:9px;letter-spacing:3px;text-transform:uppercase;color:var(--muted)}
 .scroll-line{width:1px;height:44px;background:linear-gradient(to bottom,var(--gold),transparent);animation:scrollLine 1.5s ease-in-out infinite}
 
@@ -164,19 +164,19 @@ footer{padding:36px 48px;border-top:1px solid rgba(255,255,255,.05);display:flex
   <video class="hero-video" autoplay muted loop playsinline src="eagle-hero.mp4"></video>
   <div class="hero-overlay"></div>
   <!-- ВЕРХ: Беркут + EAGLE -->
-  <div style="position:absolute;top:68px;left:0;right:0;text-align:center;z-index:2;padding:0 24px;opacity:0;animation:fadeUp .8s ease .3s forwards">
+  <div style="position:absolute;top:68px;left:0;right:0;text-align:center;z-index:2;opacity:0;animation:fadeUp .8s ease .3s forwards">
     <div style="font-size:11px;letter-spacing:6px;text-transform:uppercase;color:var(--gold);font-weight:300;margin-bottom:10px">Беркут · Aquila chrysaetos · EAGLE</div>
   </div>
   <!-- EAGLE — выше беркута -->
-  <div style="position:absolute;top:100px;left:0;right:0;text-align:center;z-index:2;padding:0 24px;opacity:0;animation:fadeUp .8s ease .4s forwards">
+  <div style="position:absolute;top:100px;left:0;right:0;text-align:center;z-index:2;opacity:0;animation:fadeUp .8s ease .4s forwards">
     <h1 class="hero-h1" style="margin-bottom:0;line-height:1">EAGLE</h1>
   </div>
   <!-- Свобода + подзаголовок — внизу -->
-  <div style="position:absolute;bottom:80px;left:0;right:0;text-align:center;z-index:2;padding:0 24px;opacity:0;animation:fadeUp .8s ease .6s forwards">
-    <h1 class="hero-h1" style="margin-bottom:8px;font-size:clamp(44px,8vw,110px)"><span>Свобода</span></h1>
-    <div class="hero-sub">Властелин небес · Хозяин горизонта</div>
+  <div style="position:absolute;bottom:80px;left:0;right:0;z-index:2;opacity:0;animation:fadeUp .8s ease .6s forwards;display:flex;flex-direction:column;align-items:center">
+    <div style="font-family:'Marck Script',cursive;font-size:clamp(44px,8vw,110px);color:var(--gold);text-shadow:0 0 60px rgba(201,168,76,.4);line-height:1;margin-bottom:8px;text-align:center">Свобода</div>
+    <div style="font-size:clamp(11px,1.5vw,14px);letter-spacing:4px;text-transform:uppercase;color:var(--muted);font-weight:300;text-align:center">Властелин небес · Хозяин горизонта</div>
   </div>
-  <div class="hero-scroll-hint" style="bottom:24px">
+  <div class="hero-scroll-hint" style="bottom:28px">
     <div class="scroll-line"></div>
     <span>Листай</span>
   </div>
@@ -216,7 +216,7 @@ footer{padding:36px 48px;border-top:1px solid rgba(255,255,255,.05);display:flex
       <div class="auto-pre" id="auto-pre"></div>
     </div>
     <!-- Центральный текст: главное — чуть ниже центра -->
-    <div style="text-align:center;margin-top:600px">
+    <div style="text-align:center;margin-top:320px">
       <div class="auto-main" id="auto-main"></div>
     </div>
     <!-- Нижний текст: подпись -->
