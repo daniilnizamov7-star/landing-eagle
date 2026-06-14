@@ -70,7 +70,7 @@ nav::before{content:'';position:absolute;inset:0;background:linear-gradient(to b
 .fs-divider{position:absolute;bottom:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,rgba(201,168,76,.25),transparent)}
 @media(max-width:768px){
   .fs-section{min-height:100svh}
-  .fs-video{transform:scale(0.6);transform-origin:center center}
+  .fs-video{object-position:center center}
   .fs-content{padding:80px 24px 60px}
   .fs-overlay-left,.fs-overlay-right{background:linear-gradient(to bottom,rgba(0,0,0,.7) 0%,rgba(0,0,0,.2) 40%,rgba(0,0,0,.7) 100%)}
   .fs-content-right{justify-content:flex-start}
@@ -107,7 +107,7 @@ nav::before{content:'';position:absolute;inset:0;background:linear-gradient(to b
 .sticky-wrap{position:relative;height:300vh}
 .sticky-inner{position:sticky;top:0;height:100vh;overflow:hidden;background-image:url(eagle-cliff.jpg);background-size:cover;background-position:center center}
 @media(max-width:768px){
-  .sticky-inner{background-size:160%;background-position:40% 20%}
+  .sticky-inner{background-position:center 35%}
 }
 .sticky-slide{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;opacity:0;transition:opacity .4s ease}
 .sticky-slide.active{opacity:1}
